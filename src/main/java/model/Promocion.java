@@ -2,7 +2,7 @@ package model;
 
 import java.util.*;
 
-public abstract class Promocion extends Propuestas {
+public class Promocion extends Propuestas {
 	protected static int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
 	protected double descuento;
