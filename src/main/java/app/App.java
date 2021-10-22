@@ -24,18 +24,15 @@ public class App {
 	System.out.println(usuarioDAO.insert(Sofi));
 //		System.out.println(usuarioDAO.delete(Facu));
 		
-		
-		/*String url = "jdbc:sqlite:C:\\Users\\Alvaro\\Desktop\\ALVARO\\INGENIERIA AGRONOMICA\\Cursos\\Argentina Programa 2\\TP PROYECT PARTE 2\\Tierra_Media_Prueba.db";
-		Connection connection = DriverManager.getConnection(url);
-		
-		String sql = "SELECT COUNT (1) AS TOTAL FROM USERS";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		
-		ResultSet resultados = statement.executeQuery();
-		
-		resultados.next();
-		System.out.println(resultados.getInt("TOTAL"));
-		
-		connection.close();*/
+		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
+		System.out.println(atraccionDAO.findAll());
+		System.out.println(atraccionDAO.findByIdAtraccion(2));
+		System.out.println(atraccionDAO.findByNombre("Moria"));
+		System.out.println(atraccionDAO.findByCupo(25));
+		System.out.println(atraccionDAO.findByCosto(25));
+		System.out.println(atraccionDAO.findByTipo("AVENTURA"));
+		System.out.println(atraccionDAO.findByDuracion(6.5));
+	
+	
 	}
 }

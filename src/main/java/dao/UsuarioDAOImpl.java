@@ -14,10 +14,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	private Usuario toUsuario(ResultSet result) {
 		try {
 			return new Usuario(
-							   result.getString(1), 
-							   result.getInt(2),
-							   result.getDouble(3),
-							   result.getString(4));
+							   result.getString(2), 
+							   result.getInt(4),
+							   result.getDouble(5),
+							   result.getString(3));
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -144,12 +144,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public List<Usuario> findByPresupuesto(double presupuesto) {
+	public List<Usuario> findByPresupuesto(int presupuesto) {
 		try {
 			String query = "SELECT * FROM USUARIO WHERE PRESUPUESTO = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setDouble(1, presupuesto);
+			statement.setInt(1, presupuesto);
 
 			ResultSet results = statement.executeQuery();
 			

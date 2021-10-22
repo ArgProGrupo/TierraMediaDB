@@ -3,6 +3,7 @@ package model;
 import java.util.Objects;
 
 public abstract class Propuestas {
+	protected int idAtraccion;
 	protected String nombrePropuesta;
 	protected int costo;
 	protected double tiempo;
@@ -43,6 +44,10 @@ public abstract class Propuestas {
 
 	public String getNombre() {
 		return this.nombrePropuesta;
+	}
+	
+	public int getIdAtraccion() {
+		return this.idAtraccion;
 	}
 
 	@Override

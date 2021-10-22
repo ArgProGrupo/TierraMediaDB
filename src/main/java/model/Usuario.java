@@ -7,7 +7,7 @@ public class Usuario {
 
 	public int idNombre;
 	public String nombre;
-	public double presupuesto;
+	public int presupuesto;
 	public double tiempoDisponible;
 	public String atraccionFavorita;
 	public ArrayList<Propuestas> itinerarioUsuario;
