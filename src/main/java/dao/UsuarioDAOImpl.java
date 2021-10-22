@@ -13,10 +13,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	
 	private Usuario toUsuario(ResultSet result) {
 		try {
-			return new Usuario(result.getInt(1), 
-							   result.getString(2), 
+			return new Usuario(
+							   result.getString(1), 
+							   result.getInt(2),
 							   result.getDouble(3),
-							   result.getDouble(4));
+							   result.getString(4));
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -59,11 +60,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	public int insert(Usuario t) {
 		try {
-			String query = "INSERT INTO USUARIO (ID_USUARIO, NOMBRE, PRESUPUESTO, TIEMPO_DISPONIBLE) VALUES (?, ?, ?, ?)";
+			String query = "INSERT INTO USUARIO (NOMBRE, TIPO_FAVORITO, PRESUPUESTO, TIEMPO_DISPONIBLE) VALUES (?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setInt(1, t.getIdNombre());
-			statement.setString(2, t.getNombre());
+			statement.setString(1, t.getNombre());
+			statement.setString(2, t.getTipoAtraccionFavorita());
 			statement.setDouble(3, t.getPresupuesto());
 			statement.setDouble(4, t.getTiempo());
 			
@@ -76,7 +77,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	public int update(Usuario t) {
 		try {
-			String query = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPO_DISPONIBLE = ? WHERE ID = ?";
+			String query = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPO_DISPONIBLE = ? WHERE ID_USUARIO = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setDouble(1, t.getPresupuesto());
@@ -92,7 +93,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	public int delete(Usuario t) {
 		try {
-			String query = "DELETE FROM USUARIO WHERE ID = ?";
+			String query = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 
@@ -162,7 +163,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public List<Usuario> fiindByTiempoDisponible(double tiempoDisponible) {
+	public List<Usuario> findByTiempoDisponible(double tiempoDisponible) {
 		try {
 			String query = "SELECT * FROM USUARIO WHERE TIEMPO_DISPONIBLE = ?";
 			Connection conn = ConnectionProvider.getConnection();

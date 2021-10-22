@@ -7,7 +7,7 @@ public abstract class Promocion extends Propuestas {
 	protected ArrayList<Propuestas> promo;
 	protected double descuento;
 
-	public Promocion(String nombrePropuesta, TipoAtraccion tipo, int cantAtracciones) {
+	public Promocion(String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.esPromo = true;
 		this.promo = (ArrayList<Propuestas>) promo;

@@ -8,7 +8,7 @@ import java.util.List;
 public class DescuentoTresPorDos extends Promocion {
 	public Propuestas atraccionGratis;
 
-	public DescuentoTresPorDos(String nombrePropuesta, TipoAtraccion tipo, int cantAtracciones,
+	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int cantAtracciones,
 			Propuestas atraccionGratis, List<Propuestas> promo) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.promo = (ArrayList<Propuestas>) promo;
@@ -58,7 +58,7 @@ public class DescuentoTresPorDos extends Promocion {
 		return calcularCupo();
 	}
 
-	public TipoAtraccion getTipo() {
+	public String getTipo() {
 		return this.tipo;
 	}
 

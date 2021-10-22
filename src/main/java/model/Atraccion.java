@@ -2,7 +2,7 @@ package model;
 
 public class Atraccion extends Propuestas {
 
-	public Atraccion(String nombrePropuesta, int costo, double tiempo, int cupo, TipoAtraccion tipo) {
+	public Atraccion(String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
 		super(nombrePropuesta, costo, tiempo, cupo, tipo);
 		this.esPromo = false;
 	}

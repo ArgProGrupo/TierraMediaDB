@@ -7,11 +7,11 @@ public abstract class Propuestas {
 	protected int costo;
 	protected double tiempo;
 	protected int cupo;
-	protected TipoAtraccion tipo;
+	protected String tipo;
 	protected int cantAtracciones;
 	protected boolean esPromo;
 
-	public Propuestas(String nombrePropuesta, int costo, double tiempo, int cupo, TipoAtraccion tipo) {
+	public Propuestas(String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
 		this.nombrePropuesta = nombrePropuesta;
 		this.costo = costo;
 		this.tiempo = tiempo;
@@ -19,7 +19,7 @@ public abstract class Propuestas {
 		this.tipo = tipo;
 	}
 
-	public Propuestas(String nombrePropuesta, TipoAtraccion tipo, int cantAtracciones) {
+	public Propuestas(String nombrePropuesta, String tipo, int cantAtracciones) {
 		this.nombrePropuesta = nombrePropuesta;
 		this.tipo = tipo;
 		this.cantAtracciones = cantAtracciones;
@@ -37,7 +37,7 @@ public abstract class Propuestas {
 		return this.cupo;
 	}
 
-	public TipoAtraccion getTipo() {
+	public String getTipo() {
 		return this.tipo;
 	}
 

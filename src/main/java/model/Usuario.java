@@ -9,13 +9,12 @@ public class Usuario {
 	public String nombre;
 	public double presupuesto;
 	public double tiempoDisponible;
-	public TipoAtraccion atraccionFavorita;
+	public String atraccionFavorita;
 	public ArrayList<Propuestas> itinerarioUsuario;
 
-	public Usuario(int idNombre ,String nombre, double presupuesto, double tiempoDisponible,
-					TipoAtraccion atraccionFavorita) {
+	public Usuario(String nombre, int presupuesto, double tiempoDisponible,
+					String atraccionFavorita) {
 		
-		this.idNombre = idNombre;
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;
@@ -23,15 +22,19 @@ public class Usuario {
 		this.itinerarioUsuario = new ArrayList<Propuestas>();
 	}
 	
-	public Usuario(int idNombre, String nombre, double presupuesto, double tiempoDisponible) {
-		this.idNombre = idNombre;
-		this.nombre = nombre;
-		this.presupuesto = presupuesto;
-		this.tiempoDisponible = tiempoDisponible;
-	}
+//	public Usuario(String nombre, int presupuesto, double tiempoDisponible) {
+//		
+//		this.nombre = nombre;
+//		this.presupuesto = presupuesto;
+//		this.tiempoDisponible = tiempoDisponible;
+//	}
 
 	public int getIdNombre() {
 		return idNombre;
+	}
+	
+	public int setIdUsuario(int id) {
+		return this.idNombre = id;
 	}
 
 	public String getNombre() {
@@ -46,7 +49,7 @@ public class Usuario {
 		return this.tiempoDisponible;
 	}
 
-	public TipoAtraccion getTipoAtraccionFavorita() {
+	public String getTipoAtraccionFavorita() {
 		return this.atraccionFavorita;
 	}
 

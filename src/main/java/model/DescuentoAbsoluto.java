@@ -6,7 +6,7 @@ import java.util.List;
 public class DescuentoAbsoluto extends Promocion {
 	private int descuento;
 
-	public DescuentoAbsoluto(String nombrePropuesta, TipoAtraccion tipo, int cantAtracciones, int descuento,
+	public DescuentoAbsoluto(String nombrePropuesta, String tipo, int cantAtracciones, int descuento,
 			List<Propuestas> promo) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.descuento = descuento;
@@ -50,7 +50,7 @@ public class DescuentoAbsoluto extends Promocion {
 		return calcularCupo();
 	}
 
-	public TipoAtraccion getTipo() {
+	public String getTipo() {
 		return this.tipo;
 	}
 }
