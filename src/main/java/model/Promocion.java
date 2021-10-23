@@ -10,7 +10,8 @@ public class Promocion extends Propuestas {
 	public Promocion(String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.esPromo = true;
-		this.promo = (ArrayList<Propuestas>) promo;
+//		this.promo = (ArrayList<Propuestas>) promo;
+		this.promo = new ArrayList<Propuestas>();
 	}
 
 	public int calcularCosto() {

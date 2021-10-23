@@ -1,20 +1,25 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DescuentoPorcentaje extends Promocion {
-	public double descuento;
+	public int descuento;
 
-	public DescuentoPorcentaje(String nombrePropuesta, String tipo, int cantAtracciones, double descuento,
-			List<Propuestas> promo) {
+//	public DescuentoPorcentaje(String nombrePropuesta, String tipo, int cantAtracciones, double descuento,
+//			List<Propuestas> promo) {
+//		super(nombrePropuesta, tipo, cantAtracciones);
+//		this.descuento = descuento;
+//		this.promo = (ArrayList<Propuestas>) promo;
+//		DescuentoPorcentaje.cantAtracciones = cantAtracciones;
+//	}
+	
+	public DescuentoPorcentaje(String nombrePropuesta, String tipo, int descuento) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.descuento = descuento;
-		this.promo = (ArrayList<Propuestas>) promo;
-		DescuentoPorcentaje.cantAtracciones = cantAtracciones;
+		//this.promo = (ArrayList<Propuestas>) promo;
 	}
-
-	public double getDescuento() {
+	
+	public int getDescuento() {
 		return descuento;
 	}
 

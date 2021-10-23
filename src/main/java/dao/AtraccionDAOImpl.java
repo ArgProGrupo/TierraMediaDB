@@ -8,7 +8,6 @@ import java.util.List;
 
 import jdbc.ConnectionProvider;
 import model.Atraccion;
-import model.Usuario;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
 		

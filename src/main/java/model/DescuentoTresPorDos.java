@@ -7,12 +7,23 @@ import java.util.List;
 
 public class DescuentoTresPorDos extends Promocion {
 	public Propuestas atraccionGratis;
+	public int idAtraccionGratis;
+//	public int idAtraccion1;
+//	public int idAtraccion2;
 
-	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int cantAtracciones,
-			Propuestas atraccionGratis, List<Propuestas> promo) {
+//	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int cantAtracciones,
+//			Propuestas atraccionGratis, List<Propuestas> promo) {
+//		super(nombrePropuesta, tipo, cantAtracciones);
+//		this.promo = (ArrayList<Propuestas>) promo;
+//		this.atraccionGratis = atraccionGratis;
+//	}
+	
+	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int idAtraccionGratisz) {
 		super(nombrePropuesta, tipo, cantAtracciones);
+//		idAtraccion1 = this.idAtraccion1;
+//		idAtraccion2 = this.idAtraccion2;
+		this.idAtraccionGratis = idAtraccionGratis;
 		this.promo = (ArrayList<Propuestas>) promo;
-		this.atraccionGratis = atraccionGratis;
 	}
 
 	public Propuestas getAtraccionGratis() {
@@ -26,6 +37,19 @@ public class DescuentoTresPorDos extends Promocion {
 			}
 		}
 		return atraccionGratis;
+	}
+	
+	public int getIdAtraccionGratis() {
+		List<Propuestas> propuestas = new ArrayList<Propuestas>();
+		//ListaPropuestas.leerAtraccion();
+		for (Propuestas a : propuestas) {
+			if (a.getNombre().equals(atraccionGratis.getNombre())) {
+
+				System.out.println(promo);
+
+			}
+		}
+		return atraccionGratis.idAtraccion;
 	}
 
 	@Override

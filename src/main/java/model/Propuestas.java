@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public abstract class Propuestas {
 	protected int idAtraccion;
+	protected int idPromocion;
 	protected String nombrePropuesta;
 	protected int costo;
 	protected double tiempo;
@@ -48,6 +49,10 @@ public abstract class Propuestas {
 	
 	public int getIdAtraccion() {
 		return this.idAtraccion;
+	}
+	
+	public int getIdPromocion() {
+		return this.idPromocion;
 	}
 
 	@Override

@@ -32,6 +32,12 @@ public class App {
 		System.out.println(atraccionDAO.findByCosto(25));
 		System.out.println(atraccionDAO.findByTipo("AVENTURA"));
 		System.out.println(atraccionDAO.findByDuracion(6.5));
+		
+		DescuentoPorcentajeDAO DescuentoPorcentajeDAO = FactoryDAO.getDescuentoPorcentajeDAO();
+		System.out.println(DescuentoPorcentajeDAO.findAll());
+		
+//		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
+//		System.out.println(DescuentoAbsolutoDAO.findAll());
 	
 	
 	}
