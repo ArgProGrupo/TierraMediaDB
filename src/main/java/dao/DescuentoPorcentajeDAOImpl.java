@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
 
 public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
@@ -20,7 +21,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 
 	}
 
-	@Override
 	public List<DescuentoPorcentaje> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
@@ -38,7 +38,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	@Override
 	public int countAll() {
 		try {
 			String query = "SELECT COUNT(1) AS TOTAL FROM PROMOCION_PORCENTUAL";
@@ -56,7 +55,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	@Override
 	public int insert(DescuentoPorcentaje t) {
 		try {
 			String query = "INSERT INTO PROMOCION_PORCENTUAL (NOMBRE_PACK, TIPO, DESCUENTO) VALUES (?, ?, ?)";
@@ -73,7 +71,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	@Override
 	public int update(DescuentoPorcentaje t) {
 		try {
 			String query = "UPDATE PROMOCION_PORCENTUAL SET PORCENTAJE = ?";
@@ -88,7 +85,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	@Override
 	public int delete(DescuentoPorcentaje t) {
 		try {
 			String query = "DELETE FROM PROMOCION_PORCENTUAL WHERE ID_ATRACCION = ?";
@@ -104,7 +100,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	@Override
 	public DescuentoPorcentaje findByIdDescuentoPorcentaje(int idDescuentoPorcentaje) {
 		try {
 			String query = "SELECT * FROM PROMOCION_PORCENTUAL WHERE ID_ATRACCION = ?";
@@ -124,7 +119,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	@Override
 	public List<DescuentoPorcentaje> findByNombrePack(String nombre) {
 		try {
 			String query = "SELECT * FROM PROMOCION_PORCENTUAL WHERE NOMBRE = ?";
@@ -144,7 +138,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	@Override
 	public List<DescuentoPorcentaje> findByPorcentaje(int porcentaje) {
 		try {
 			String query = "SELECT * FROM PROMOCION_PORCENTUAL WHERE DESCUENTO = ?";
@@ -162,6 +155,11 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

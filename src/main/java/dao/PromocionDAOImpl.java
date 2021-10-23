@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import model.Atraccion;
+import model.DescuentoAbsoluto;
 import model.Promocion;
 
 public class PromocionDAOImpl implements PromocionDAO{
@@ -21,44 +22,46 @@ public class PromocionDAOImpl implements PromocionDAO{
 		
 	}
 
-	@Override
 	public List<Promocion> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public int countAll() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public int insert(Promocion t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int update(Promocion t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public int delete(Promocion t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+
 	public Atraccion findByIdPromocion(int idPromocion) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+
 	public List<Promocion> findByNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
 		// TODO Auto-generated method stub
 		return null;
 	}

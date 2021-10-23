@@ -20,7 +20,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 
 	}
 
-	@Override
 	public List<DescuentoAbsoluto> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
@@ -38,7 +37,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		}
 	}
 
-	@Override
 	public int countAll() {
 		try {
 			String query = "SELECT COUNT(1) AS TOTAL FROM PROMOCION_ABSOLUTA";
@@ -56,7 +54,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		}
 	}
 
-	@Override
 	public int insert(DescuentoAbsoluto t) {
 		try {
 			String query = "INSERT INTO PROMOCION_ABSOLUTA (NOMBRE_PACK, TIPO, DESCUENTO) VALUES (?, ?, ?)";
@@ -73,7 +70,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		}
 	}
 
-	@Override
 	public int update(DescuentoAbsoluto t) {
 		try {
 			String query = "UPDATE PROMOCION_ABSOLUTA SET DESCUENTO = ?";
@@ -88,7 +84,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		}
 	}
 
-	@Override
 	public int delete(DescuentoAbsoluto t) {
 		try {
 			String query = "DELETE FROM PROMOCION_ABSOLUTA WHERE ID_ATRACCION = ?";
@@ -104,7 +99,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		}
 	}
 
-	@Override
 	public DescuentoAbsoluto findByIdDescuentoAbsoluto(int idDescuentoAbsoluto) {
 		try {
 			String query = "SELECT * FROM PROMOCION_ABSOLUTA WHERE ID_ATRACCION = ?";
@@ -124,7 +118,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		}
 	}
 
-	@Override
 	public List<DescuentoAbsoluto> findByNombrePack(String nombre) {
 		try {
 			String query = "SELECT * FROM PROMOCION_ABSOLUTA WHERE NOMBRE = ?";
@@ -144,7 +137,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		}
 	}
 
-	@Override
 	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
 		try {
 			String query = "SELECT * FROM PROMOCION_ABSOLUTA WHERE DESCUENTO = ?";

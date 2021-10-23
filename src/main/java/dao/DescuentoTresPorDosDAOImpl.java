@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
 import model.DescuentoTresPorDos;
 
@@ -25,7 +26,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 
 	}
 
-	@Override
 	public List<DescuentoTresPorDos> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_AXB";
@@ -43,7 +43,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 	}
 
-	@Override
 	public int countAll() {
 		try {
 			String query = "SELECT COUNT(1) AS TOTAL FROM PROMOCION_AXB";
@@ -61,7 +60,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 	}
 
-	@Override
 	public int insert(DescuentoTresPorDos t) {
 		try {
 			String query = "INSERT INTO PROMOCION_AXB (NOMBRE_PACK, TIPO, ID_ATRACCION_GRATIS) VALUES (?, ?, ?)";
@@ -79,7 +77,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 	}
 	// SETEAR ATRACCION GRATIS. Propuestas.getAtraccionGratis DEVUELVE UNA ATRACCION
 	// QUE ES LO QUE TIENE QUE ACTUALIZAR ?
-	@Override
 	public int update(DescuentoTresPorDos t) {
 		try {
 			String query = "UPDATE PROMOCION_AXB SET PORCENTAJE = ?";
@@ -94,7 +91,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 	}
 
-	@Override
 	public int delete(DescuentoTresPorDos t) {
 		try {
 			String query = "DELETE FROM PROMOCION_AXB WHERE ID_BENEFICIO_AXB = ?";
@@ -110,7 +106,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 	}
 
-	@Override
 	public DescuentoTresPorDos findByIdDescuentoTresPorDos(int idDescuentoTresPorDos) {
 		try {
 			String query = "SELECT * FROM PROMOCION_AXB WHERE ID_BENEFICIO_AXB = ?";
@@ -130,7 +125,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 	}
 
-	@Override
 	public List<DescuentoTresPorDos> findByNombrePack(String nombre) {
 		try {
 			String query = "SELECT * FROM PROMOCION_AXB WHERE NOMBRE = ?";
@@ -150,7 +144,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 	}
 
-	@Override
 	public List<DescuentoTresPorDos> findIdAtraccionGratis(int id) {
 		try {
 			String query = "SELECT * FROM PROMOCION_PORCENTUAL WHERE ID_ATRACCION_GRATIS = ?";
@@ -168,6 +161,11 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	}
 
