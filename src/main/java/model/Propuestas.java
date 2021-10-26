@@ -27,6 +27,10 @@ public abstract class Propuestas {
 		this.cantAtracciones = cantAtracciones;
 	}
 
+	public Propuestas(String nombrePropuesta) {
+		this.nombrePropuesta = nombrePropuesta;
+	}
+
 	public int getCosto() {
 		return this.costo;
 	}

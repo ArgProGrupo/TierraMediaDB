@@ -3,7 +3,7 @@ package model;
 import java.util.*;
 
 public class Promocion extends Propuestas {
-	protected static int cantAtracciones;
+	protected int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
 	protected double descuento;
 
@@ -12,6 +12,11 @@ public class Promocion extends Propuestas {
 		this.esPromo = true;
 //		this.promo = (ArrayList<Propuestas>) promo;
 		this.promo = new ArrayList<Propuestas>();
+	}
+	
+	public Promocion (String nombrePropuesta, int descuento) {
+		super(nombrePropuesta);
+		this.descuento = descuento;
 	}
 
 	public int calcularCosto() {

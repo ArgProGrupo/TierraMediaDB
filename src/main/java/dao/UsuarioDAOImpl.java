@@ -7,9 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import model.DescuentoAbsoluto;
+import model.DescuentoPorcentaje;
 import model.Usuario;
 
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioDAOImpl  {
 	
 	private Usuario toUsuario(ResultSet result) {
 		try {
@@ -82,7 +84,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setDouble(1, t.getPresupuesto());
 			statement.setDouble(2, t.getTiempo());
-			statement.setInt(3, t.getIdNombre());
+			statement.setInt(3, t.getIdUsuario());
 			
 			int rows = statement.executeUpdate();
 			return rows;
@@ -91,13 +93,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public int delete(Usuario t) {
+	public int delete(Integer t) {
 		try {
 			String query = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 
-			statement.setInt(1, t.getIdNombre());
+			statement.setInt(1, t);
 			
 			int rows = statement.executeUpdate();
 			return rows;

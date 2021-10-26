@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Usuario {
 
-	public int idNombre;
+	public int idUsuario;
 	public String nombre;
 	public int presupuesto;
 	public double tiempoDisponible;
@@ -29,12 +29,12 @@ public class Usuario {
 //		this.tiempoDisponible = tiempoDisponible;
 //	}
 
-	public int getIdNombre() {
-		return idNombre;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
 	
 	public int setIdUsuario(int id) {
-		return this.idNombre = id;
+		return this.idUsuario = id;
 	}
 
 	public String getNombre() {

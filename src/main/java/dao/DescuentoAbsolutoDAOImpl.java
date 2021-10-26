@@ -3,39 +3,102 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import model.Atraccion;
 import model.DescuentoAbsoluto;
+import model.DescuentoPorcentaje;
+
+//public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
+//
+//	private DescuentoAbsoluto toDescuentoAbsoluto(ResultSet result) {
+//		try {
+//			return new DescuentoAbsoluto(result.getString(2), result.getInt(3));
+//		} catch (Exception e) {
+//			throw new MissingDataException(e);
+//		}		
+//	}
 
 public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 
 	private DescuentoAbsoluto toDescuentoAbsoluto(ResultSet result) {
 		try {
-			return new DescuentoAbsoluto(result.getString(2), result.getString(3), result.getInt(4));
+			DescuentoAbsoluto pa = new DescuentoAbsoluto(result.getString(2), result.getInt(3));
+			String query2 = "SELECT p.nombre_promo, (sum(a.costo) - ppa.descuento)  AS 'costo', sum(a.duracion) AS 'duracion_total' , min(a.cupo) AS 'cupo', ppa.descuento AS 'descuento',  a.tipo AS 'tipo', p.cant_atracciones \r\n"
+					+ " FROM promocion p, pack_atracciones pa , atraccion a, promocion_absoluta ppa\r\n"
+					+ " WHERE p.id_promo == pa.id_promocion AND a.id_atraccion == pa.id_atraccion AND p.nombre_promo LIKE '%DEGUSTACION'\r\n";
+			Connection conn2 = ConnectionProvider.getConnection();
+			PreparedStatement statement2 = conn2.prepareStatement(query2);
+			ResultSet results2 = statement2.executeQuery();
+			pa.setCosto(results2.getInt(2));
+			pa.setTiempo(results2.getDouble(3));
+			pa.setCupo(results2.getInt(4));
+			pa.setDescuento(results2.getInt(5));
+			pa.setTipo(results2.getString(6));
+			pa.setCantAtracciones(results2.getInt(7));
+
+			return pa;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-
 	}
 
-	public List<DescuentoAbsoluto> findAll() {
+	public List<Atraccion> findAll(List<Atraccion> a) {
 		try {
-			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
+			String query = "SELECT * FROM PROMOCION_ABSOLUTA"; 
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
 
-			List<DescuentoAbsoluto> promoAbs = new LinkedList<DescuentoAbsoluto>();
+			List<Atraccion> promoAbs = new LinkedList<Atraccion>();
 			while (results.next()) {
-				promoAbs.add(toDescuentoAbsoluto(results));
+				for (Atraccion atrac : a) {
+				if (atrac.getIdAtraccion() == 2)
+				promoAbs.add(atrac);
+				}
 			}
 			return promoAbs;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
+
+//		public List<DescuentoAbsoluto> findAll() {
+//		try {
+//			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
+//			Connection conn = ConnectionProvider.getConnection();
+//			PreparedStatement statement = conn.prepareStatement(query);
+//			ResultSet results = statement.executeQuery();
+//			
+//			
+//			String query2 = "SELECT p.nombre_promo, (sum(a.costo) - ppa.descuento)  AS 'costo', sum(a.duracion) AS 'duracion_total' , min(a.cupo) AS 'cupo', ppa.descuento AS 'descuento',  a.tipo AS 'tipo', p.cant_atracciones \r\n" +
+//					" FROM promocion p, pack_atracciones pa , atraccion a, promocion_absoluta ppa\r\n" +
+//					" WHERE p.id_promo == pa.id_promocion AND a.id_atraccion == pa.id_atraccion AND p.nombre_promo LIKE '%DEGUSTACION'\r\n";
+//			Connection conn2 = ConnectionProvider.getConnection();
+//			PreparedStatement statement2 = conn2.prepareStatement(query2);
+//			ResultSet results2 = statement2.executeQuery();
+//			
+//
+//			List<DescuentoAbsoluto> promoAbs = new LinkedList<DescuentoAbsoluto>();
+//			while (results.next()) {
+//				promoAbs.add(toDescuentoAbsoluto(results));
+//			}
+//			for(DescuentoAbsoluto pa : promoAbs) {
+//			pa.setCosto(results2.getInt(2));
+//			pa.setTiempo(results2.getDouble(3));
+//			pa.setCupo(results2.getInt(4));
+//			pa.setDescuento(results2.getInt(5));
+//			pa.setTipo(results2.getString(6));
+//			pa.setCantAtracciones(results2.getInt(7));
+//			}
+//			return promoAbs;
+//		} catch (Exception e) {
+//			throw new MissingDataException(e);
+//		}
+//	}
 
 	public int countAll() {
 		try {
@@ -154,6 +217,21 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	public List<DescuentoPorcentaje> findByPorcentaje(int porcentaje) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<DescuentoAbsoluto> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Atraccion> findAll(ArrayList<Atraccion> a) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

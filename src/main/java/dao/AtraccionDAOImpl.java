@@ -8,6 +8,8 @@ import java.util.List;
 
 import jdbc.ConnectionProvider;
 import model.Atraccion;
+import model.DescuentoAbsoluto;
+import model.DescuentoPorcentaje;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
 		
@@ -218,6 +220,16 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<DescuentoPorcentaje> findByPorcentaje(int porcentaje) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

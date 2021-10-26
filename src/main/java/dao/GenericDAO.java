@@ -2,6 +2,9 @@ package dao;
 
 import java.util.List;
 
+import model.DescuentoAbsoluto;
+import model.DescuentoPorcentaje;
+
 public interface GenericDAO<T> {
 	
 	public List<T> findAll();

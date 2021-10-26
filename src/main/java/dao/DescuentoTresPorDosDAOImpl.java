@@ -17,9 +17,7 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		try {
 			return new DescuentoTresPorDos(result.getString(2), 
 												result.getString(3),
-												result.getInt(4),
-												result.getInt(5),
-												result.getInt(6));
+												result.getInt(4));
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

@@ -14,11 +14,24 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 
 	private DescuentoPorcentaje toDescuentoPorcentaje(ResultSet result) {
 		try {
-			return new DescuentoPorcentaje(result.getString(2), result.getString(3), result.getInt(4));
+			DescuentoPorcentaje dp = new DescuentoPorcentaje(result.getString(2), result.getInt(3));
+			String query2 = "SELECT p.nombre_promo, (sum(a.costo) - (sum(a.costo) * (pr.porcentaje) / 100) ) AS 'costo', sum(a.duracion) AS 'duracion_total' , min(a.cupo) AS 'cupo', pr.porcentaje AS 'porcentaje', a.tipo AS 'tipo', p.cant_atracciones \r\n"
+					+ "FROM promocion p, pack_atracciones pa , atraccion a, promocion_porcentual pr \r\n"
+					+ "WHERE p.id_promo == pa.id_promocion AND a.id_atraccion == pa.id_atraccion AND p.nombre_promo LIKE '%AVENTURA' \r\n";
+			Connection conn2 = ConnectionProvider.getConnection();
+			PreparedStatement statement2 = conn2.prepareStatement(query2);
+			ResultSet results2 = statement2.executeQuery();
+			dp.setCosto(results2.getInt(2));
+			dp.setTiempo(results2.getDouble(3));
+			dp.setCupo(results2.getInt(4));
+			dp.setDescuento(results2.getInt(5));
+			dp.setTipo(results2.getString(6));
+			dp.setCantAtracciones(results2.getInt(7));
+
+			return dp;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-
 	}
 
 	public List<DescuentoPorcentaje> findAll() {
