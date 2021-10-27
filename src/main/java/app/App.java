@@ -9,7 +9,7 @@ import model.Usuario;
 
 public class App {
 	public static void main(String[] args) throws SQLException {
-		UsuarioDAO usuarioDAO = FactoryDAO.getUsuarioDAO();
+		//UsuarioDAO usuarioDAO = FactoryDAO.getUsuarioDAO();
 		//System.out.println(usuarioDAO.findAll());
 		//System.out.println(usuarioDAO.findByIdUsuario(6));
 		//System.out.println(usuarioDAO.findByNombre("Facu"));
@@ -20,7 +20,7 @@ public class App {
         //System.out.println(usuarioDAO.insert(alvaro));
 		//System.out.println(usuarioDAO.delete(alvaro));
 		//Usuario facu = new Usuario(12);
-		usuarioDAO.deleteById(13);
+		//usuarioDAO.deleteById(13);
 		//System.out.println(usuarioDAO.findByTipoFavorito("AVENTURA"));
 		
 		//AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
@@ -41,8 +41,8 @@ public class App {
 //		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
 //		System.out.println(DescuentoAbsolutoDAO.findAll());
 		
-		PromocionDAO promocionDAO = FactoryDAO.getPromocionDAO();
-		System.out.println(promocionDAO.findAll());
+		//PromocionDAO promocionDAO = FactoryDAO.getPromocionDAO();
+		//System.out.println(promocionDAO.findAll());
 	
 	
 	}
