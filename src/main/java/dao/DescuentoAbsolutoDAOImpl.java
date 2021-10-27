@@ -11,6 +11,7 @@ import jdbc.ConnectionProvider;
 import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
+import model.DescuentoTresPorDos;
 
 //public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 //
@@ -48,16 +49,20 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 
 	public List<Atraccion> findAll(List<Atraccion> a) {
 		try {
-			String query = "SELECT * FROM PROMOCION_ABSOLUTA"; 
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(query);
-			ResultSet results = statement.executeQuery();
 
 			List<Atraccion> promoAbs = new LinkedList<Atraccion>();
-			while (results.next()) {
+
+			String query2 = "SELECT a.id_atraccion, p.id_promo \r\n"
+					+ "FROM atraccion a, pack_atracciones pa, promocion p \r\n"
+					+ "WHERE a.id_atraccion == pa.id_atraccion AND p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+			Connection conn2 = ConnectionProvider.getConnection();
+			PreparedStatement statement2 = conn2.prepareStatement(query2);
+			statement2.setInt(1,2);
+			ResultSet results2 = statement2.executeQuery();
+			while (results2.next()) {
 				for (Atraccion atrac : a) {
-				if (atrac.getIdAtraccion() == 2)
-				promoAbs.add(atrac);
+					if (atrac.getIdAtraccion() == results2.getInt(1))
+						promoAbs.add(atrac);
 				}
 			}
 			return promoAbs;
@@ -225,13 +230,20 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 	}
 
 	public List<DescuentoAbsoluto> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		try {
+			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
 
-	public List<Atraccion> findAll(ArrayList<Atraccion> a) {
-		// TODO Auto-generated method stub
-		return null;
+			List<DescuentoAbsoluto> promoAbs = new LinkedList<DescuentoAbsoluto>();
+			while (results.next()) {
+				promoAbs.add(toDescuentoAbsoluto(results));
+			}
+			return promoAbs;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 }

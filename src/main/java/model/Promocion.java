@@ -5,7 +5,7 @@ import java.util.*;
 public class Promocion extends Propuestas {
 	protected int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
-	protected double descuento;
+	protected int descuento;
 
 	public Promocion(String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
@@ -17,6 +17,11 @@ public class Promocion extends Propuestas {
 	public Promocion (String nombrePropuesta, int descuento) {
 		super(nombrePropuesta);
 		this.descuento = descuento;
+		this.promo = new ArrayList<Propuestas>();
+	}
+	public Promocion (String nombrePropuesta) {
+		super(nombrePropuesta);
+		this.promo = new ArrayList<Propuestas>();
 	}
 
 	public int calcularCosto() {

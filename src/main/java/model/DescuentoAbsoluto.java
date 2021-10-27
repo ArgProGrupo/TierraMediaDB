@@ -30,7 +30,7 @@ public class DescuentoAbsoluto extends Promocion {
 	}
 
 	public int getDescuento() {
-		return descuento;
+		return this.descuento;
 	}
 
 	public int calcularCosto() {

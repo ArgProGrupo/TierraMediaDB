@@ -15,4 +15,7 @@ public class FactoryDAO {
 	public static DescuentoAbsolutoDAO getDescuentoAbsolutoDAO() {
 		return new DescuentoAbsolutoDAOImpl();
 	}
+	public static DescuentoTresPorDosDAO getDescuentoTresPorDos() {
+		return new DescuentoTresPorDosDAOImpl();
+	}
 }

@@ -7,6 +7,11 @@ public class Atraccion extends Propuestas {
 		this.esPromo = false;
 	}
 
+	public Atraccion(int idAtraccion, String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
+		super(idAtraccion, nombrePropuesta, costo, tiempo, cupo, tipo);
+		this.esPromo = false;
+	}
+
 	@Override
 	public String toString() {
 		return "Propuesta: " + nombrePropuesta + "; Costo: " + this.costo + "; Tiempo: " + this.tiempo + "; Cupo: "

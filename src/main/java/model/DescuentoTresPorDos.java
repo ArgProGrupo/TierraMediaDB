@@ -18,12 +18,17 @@ public class DescuentoTresPorDos extends Promocion {
 //		this.atraccionGratis = atraccionGratis;
 //	}
 	
-	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int idAtraccionGratisz) {
-		super(nombrePropuesta, tipo, cantAtracciones);
-//		idAtraccion1 = this.idAtraccion1;
-//		idAtraccion2 = this.idAtraccion2;
+//	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int cantAtracciones) {
+//		super(nombrePropuesta, tipo, cantAtracciones);
+////		idAtraccion1 = this.idAtraccion1;
+////		idAtraccion2 = this.idAtraccion2;
+////		this.idAtraccionGratis = idAtraccionGratis;
+//		this.promo = (ArrayList<Propuestas>) promo;
+//	}
+
+	public DescuentoTresPorDos(String nombrePropuesta,  int idAtraccionGratis) {
+		super(nombrePropuesta);
 		this.idAtraccionGratis = idAtraccionGratis;
-		this.promo = (ArrayList<Propuestas>) promo;
 	}
 
 	public Propuestas getAtraccionGratis() {
@@ -71,15 +76,15 @@ public class DescuentoTresPorDos extends Promocion {
 	}
 
 	public int getCosto() {
-		return calcularCosto();
+		return this.costo;
 	}
 
 	public double getTiempo() {
-		return calcularTiempo();
+		return this.tiempo;
 	}
 
 	public int getCupo() {
-		return calcularCupo();
+		return this.cupo;
 	}
 
 	public String getTipo() {
@@ -88,9 +93,35 @@ public class DescuentoTresPorDos extends Promocion {
 
 	@Override
 	public String toString() {
-		return "Promocion: " + nombrePropuesta + "; Costo: " + calcularCosto() +
-				"; Tiempo: " + calcularTiempo() + "; Cupo: " + calcularCupo() + 
-				"; Cantidad de atracciones: " +	promo.size() + 
+		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() +
+				"; Tiempo: " + getTiempo() + "; Cupo: " + getCupo() + 
+				"; Cantidad de atracciones: " +	getCantAtracciones() + 
 				"; Atraccion de regalo: " + atraccionGratis.getNombre();
+	}
+	public int setCosto(int costo) {
+		return this.costo = costo;	
+	}
+	public double setTiempo(double tiempo) {
+		return this.tiempo = tiempo;
+	}
+	public int setCupo(int cupo) {
+		return this.cupo = cupo;
+	}
+	public int getCantAtracciones() {
+		return this.cantAtracciones;
+	}
+	public int setCantAtracciones(int cant) {
+		return this.cantAtracciones = cant;
+	}
+	public String setTipo(String tipo) {
+		return this.tipo = tipo;
+	}
+	public int setIdAtracccionGratis(int idAtraccionGratis) {
+		return this.idAtraccionGratis = idAtraccionGratis;
+	}
+
+	public Propuestas setAtraccionGratis(Atraccion atraccionGratis) {
+		return this.atraccionGratis = atraccionGratis;
+		
 	}
 }

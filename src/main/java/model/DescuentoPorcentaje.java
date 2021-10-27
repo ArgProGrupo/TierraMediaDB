@@ -42,7 +42,7 @@ public class DescuentoPorcentaje extends Promocion {
 	public String toString() {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() + "; Tiempo: " + getTiempo()
 				+ "; Cupo: " + getCupo() + "; Cantidad de atracciones: " + cantAtracciones + "; Descuento: "
-				+ (100 - (descuento * 100)) + "%";
+				+ descuento + " %";
 	}
 
 	public int getCosto() {

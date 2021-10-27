@@ -12,20 +12,21 @@ import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
-		
-		private Atraccion toAtraccion(ResultSet result) {
-			try {
-				return new Atraccion(
-								   result.getString(2), 
-								   result.getInt(3),
-								   result.getDouble(4),
-								   result.getInt(5),
-								   result.getString(6));
-			} catch (Exception e) {
-				throw new MissingDataException(e);
-			}
-			
+
+	private Atraccion toAtraccion(ResultSet result) {
+		try {
+			return new Atraccion(
+					result.getInt(1), 
+					result.getString(2), 
+					result.getInt(3), 
+					result.getDouble(4),
+					result.getInt(5), 
+					result.getString(6));
+		} catch (Exception e) {
+			throw new MissingDataException(e);
 		}
+
+	}
 
 	public List<Atraccion> findAll() {
 		try {
@@ -33,7 +34,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -50,11 +51,11 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
-			
+
 			results.next();
-			
+
 			int total = results.getInt("TOTAL");
-			
+
 			return total;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
@@ -70,7 +71,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(2, t.getCosto());
 			statement.setDouble(3, t.getTiempo());
 			statement.setInt(4, t.getCupo());
-			
+
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {
@@ -85,7 +86,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, t.getCupo());
 			statement.setInt(2, t.getIdAtraccion());
-			
+
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {
@@ -100,7 +101,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			PreparedStatement statement = conn.prepareStatement(query);
 
 			statement.setInt(1, t.getIdAtraccion());
-			
+
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {
@@ -116,9 +117,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(1, idAtraccion);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			Atraccion atraccion = null;
-			if(results.next()) {
+			if (results.next()) {
 				atraccion = toAtraccion(results);
 			}
 			return atraccion;
@@ -135,7 +136,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setString(1, nombre);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -154,7 +155,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(1, costo);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -173,7 +174,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setDouble(1, duracion);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -192,7 +193,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(1, cupo);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -211,7 +212,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setString(1, tipo);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));

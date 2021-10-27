@@ -11,7 +11,7 @@ import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
 import model.Usuario;
 
-public class UsuarioDAOImpl  {
+public class UsuarioDAOImpl implements UsuarioDAO  {
 	
 	private Usuario toUsuario(ResultSet result) {
 		try {
@@ -182,6 +182,11 @@ public class UsuarioDAOImpl  {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	public int delete(Usuario t) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

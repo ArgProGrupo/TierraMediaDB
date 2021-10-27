@@ -7,8 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
+import model.DescuentoTresPorDos;
 
 public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 
@@ -34,18 +36,25 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	public List<DescuentoPorcentaje> findAll() {
+	public List<Atraccion> findAll(List<Atraccion> a) {
 		try {
-			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(query);
-			ResultSet results = statement.executeQuery();
 
-			List<DescuentoPorcentaje> promoPorc = new LinkedList<DescuentoPorcentaje>();
-			while (results.next()) {
-				promoPorc.add(toDescuentoPorcentaje(results));
+			List<Atraccion> promoAbs = new LinkedList<Atraccion>();
+
+			String query2 = "SELECT a.id_atraccion, p.id_promo \r\n"
+					+ "FROM atraccion a, pack_atracciones pa, promocion p \r\n"
+					+ "WHERE a.id_atraccion == pa.id_atraccion AND p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+			Connection conn2 = ConnectionProvider.getConnection();
+			PreparedStatement statement2 = conn2.prepareStatement(query2);
+			statement2.setInt(1,3);
+			ResultSet results2 = statement2.executeQuery();
+			while (results2.next()) {
+				for (Atraccion atrac : a) {
+					if (atrac.getIdAtraccion() == results2.getInt(1))
+						promoAbs.add(atrac);
+				}
 			}
-			return promoPorc;
+			return promoAbs;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -173,6 +182,23 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<DescuentoPorcentaje> findAll() {
+		try {
+			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
+
+			List<DescuentoPorcentaje> promoPor = new LinkedList<DescuentoPorcentaje>();
+			while (results.next()) {
+				promoPor.add(toDescuentoPorcentaje(results));
+			}
+			return promoPor;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 }

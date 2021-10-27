@@ -20,6 +20,15 @@ public abstract class Propuestas {
 		this.cupo = cupo;
 		this.tipo = tipo;
 	}
+	
+	public Propuestas(int idAtraccion, String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
+		this.idAtraccion = idAtraccion;
+		this.nombrePropuesta = nombrePropuesta;
+		this.costo = costo;
+		this.tiempo = tiempo;
+		this.cupo = cupo;
+		this.tipo = tipo;
+	}
 
 	public Propuestas(String nombrePropuesta, String tipo, int cantAtracciones) {
 		this.nombrePropuesta = nombrePropuesta;
