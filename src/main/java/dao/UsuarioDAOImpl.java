@@ -14,10 +14,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	private Usuario toUsuario(ResultSet result) {
 		try {
 			return new Usuario(
-							   result.getString(2), 
-							   result.getInt(4),
-							   result.getDouble(5),
-							   result.getString(3));
+					result.getInt(1),
+					result.getString(2),
+					result.getString(3),
+					result.getInt(4),
+					result.getDouble(5));
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -82,7 +83,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setDouble(1, t.getPresupuesto());
 			statement.setDouble(2, t.getTiempo());
-			statement.setInt(3, t.getIdNombre());
+			statement.setInt(3, t.getIdUsuario());
 			
 			int rows = statement.executeUpdate();
 			return rows;
@@ -97,7 +98,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 
-			statement.setInt(1, t.getIdNombre());
+			statement.setInt(1, t.getIdUsuario());
 			
 			int rows = statement.executeUpdate();
 			return rows;
@@ -131,6 +132,25 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, nombre);
+
+			ResultSet results = statement.executeQuery();
+			
+			List<Usuario> usuarios = new LinkedList<Usuario>();
+			while (results.next()) {
+				usuarios.add(toUsuario(results));
+			}
+			return usuarios;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	public List<Usuario> findByTipoFavorito(String atraccionFavorita) {
+		try {
+			String query = "SELECT * FROM USUARIO WHERE TIPO_FAVORITO = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, atraccionFavorita);
 
 			ResultSet results = statement.executeQuery();
 			
@@ -177,6 +197,21 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				usuarios.add(toUsuario(results));
 			}
 			return usuarios;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	public int deleteById(int t) {
+		try {
+			String query = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+
+			statement.setInt(1, t);
+			
+			int rows = statement.executeUpdate();
+			return rows;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

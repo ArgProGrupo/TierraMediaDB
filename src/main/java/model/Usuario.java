@@ -5,36 +5,38 @@ import java.util.*;
 
 public class Usuario {
 
-	public int idNombre;
+	public int idUsuario;
 	public String nombre;
+	public String atraccionFavorita;
 	public int presupuesto;
 	public double tiempoDisponible;
-	public String atraccionFavorita;
 	public ArrayList<Propuestas> itinerarioUsuario;
 
-	public Usuario(String nombre, int presupuesto, double tiempoDisponible,
-					String atraccionFavorita) {
+	public Usuario(int idUsuario, String nombre, String atraccionFavorita, int presupuesto, 
+			double tiempoDisponible) {
 		
+		this.idUsuario = idUsuario;
 		this.nombre = nombre;
+		this.atraccionFavorita = atraccionFavorita;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;
-		this.atraccionFavorita = atraccionFavorita;
+		
 		this.itinerarioUsuario = new ArrayList<Propuestas>();
 	}
 	
-//	public Usuario(String nombre, int presupuesto, double tiempoDisponible) {
-//		
-//		this.nombre = nombre;
-//		this.presupuesto = presupuesto;
-//		this.tiempoDisponible = tiempoDisponible;
-//	}
-
-	public int getIdNombre() {
-		return idNombre;
+	public Usuario(String nombre, String atraccionFavorita, int presupuesto, double tiempoDisponible) {
+		this.nombre = nombre;
+		this.atraccionFavorita = atraccionFavorita;
+		this.presupuesto = presupuesto;
+		this.tiempoDisponible = tiempoDisponible;
 	}
 	
-	public int setIdUsuario(int id) {
-		return this.idNombre = id;
+	public Usuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
 	}
 
 	public String getNombre() {
@@ -83,9 +85,9 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " | Presupuesto: " + presupuesto +
-			   " | Tiempo Disponible: " + tiempoDisponible +
-			   " | Atraccion Favorita: " + atraccionFavorita;
+		return "id_usuario: " + idUsuario + " | Nombre: " + nombre +
+			   " | Atraccion Favorita: " + atraccionFavorita + " | Presupuesto: " + presupuesto +
+			   " | Tiempo Disponible: " + tiempoDisponible;
 	}
 
 	public boolean puedeComprar(Propuestas propuesta) {

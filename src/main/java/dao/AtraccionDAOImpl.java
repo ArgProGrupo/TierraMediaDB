@@ -14,11 +14,12 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		private Atraccion toAtraccion(ResultSet result) {
 			try {
 				return new Atraccion(
-								   result.getString(2), 
-								   result.getInt(3),
-								   result.getDouble(4),
-								   result.getInt(5),
-								   result.getString(6));
+						result.getInt(1),
+						result.getString(2), 
+						result.getInt(3),
+						result.getDouble(4),
+						result.getInt(5),
+						result.getString(6));
 			} catch (Exception e) {
 				throw new MissingDataException(e);
 			}
@@ -68,6 +69,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(2, t.getCosto());
 			statement.setDouble(3, t.getTiempo());
 			statement.setInt(4, t.getCupo());
+			statement.setString(5, t.getTipo());
 			
 			int rows = statement.executeUpdate();
 			return rows;

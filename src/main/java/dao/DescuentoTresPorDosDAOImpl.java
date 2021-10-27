@@ -13,7 +13,7 @@ import model.DescuentoTresPorDos;
 
 public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 	
-	private DescuentoTresPorDos toDescuentoTresPorDos(ResultSet result) {
+	/*private DescuentoTresPorDos toDescuentoTresPorDos(ResultSet result) {
 		try {
 			return new DescuentoTresPorDos(result.getString(2), 
 												result.getString(3),
@@ -25,7 +25,7 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 
 	}
-
+*/
 	public List<DescuentoTresPorDos> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_AXB";

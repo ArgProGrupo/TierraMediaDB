@@ -3,15 +3,32 @@ package model;
 import java.util.*;
 
 public class Promocion extends Propuestas {
+	protected int idPromocion;
 	protected static int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
-	protected double descuento;
+	//protected double descuento;
+	
+	public Promocion(int idPromocion, String nombrePropuesta, String tipo, int cantAtracciones) {
+		super(nombrePropuesta, tipo, cantAtracciones);
+		this.idPromocion = idPromocion;
+		this.esPromo = true;
+		this.promo = new ArrayList<Propuestas>();
+	}
 
 	public Promocion(String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.esPromo = true;
 //		this.promo = (ArrayList<Propuestas>) promo;
 		this.promo = new ArrayList<Propuestas>();
+	}
+	
+	public Promocion(int idPromocion) {
+		super();
+		this.idPromocion = idPromocion;
+	}
+	
+	public int getIdPromocion() {
+		return this.idPromocion;
 	}
 
 	public int calcularCosto() {
@@ -63,4 +80,12 @@ public class Promocion extends Propuestas {
 			return (this.promo.contains(propuesta));
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Id: " + idPromocion + " | Nombre promo: " + nombrePropuesta +
+			   " | tipo " + tipo + " | Cantidad de atracciones: " + cantAtracciones + "\n";
+	}
+	
+	
 }

@@ -1,16 +1,34 @@
 package model;
 
 public class Atraccion extends Propuestas {
+	private int idAtraccion;
+	
+	public Atraccion(int idAtraccion, String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
+		super(nombrePropuesta, costo, tiempo, cupo, tipo);
+		this.idAtraccion = idAtraccion;
+		this.esPromo = false;
+	}
 
 	public Atraccion(String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
 		super(nombrePropuesta, costo, tiempo, cupo, tipo);
 		this.esPromo = false;
 	}
+	
+	public Atraccion(int idAtraccion) {
+		super();
+		this.idAtraccion = idAtraccion;
+	}
+	
+	
+	public int getIdAtraccion() {
+		return this.idAtraccion;
+	}
 
 	@Override
 	public String toString() {
-		return "Propuesta: " + nombrePropuesta + "; Costo: " + this.costo + "; Tiempo: " + this.tiempo + "; Cupo: "
-				+ this.getCupo() + "; Tipo De Atraccion: " + this.tipo;
+		return "Id: " + idAtraccion + " | Nombre: " + nombrePropuesta + " | Costo: " 
+				+ costo + " | Tiempo: " + tiempo + " | Cupo: "
+				+ getCupo() + " | Tipo De Atraccion: " + tipo + "\n";
 	}
 
 	@Override
