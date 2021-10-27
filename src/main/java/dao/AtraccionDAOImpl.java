@@ -8,6 +8,8 @@ import java.util.List;
 
 import jdbc.ConnectionProvider;
 import model.Atraccion;
+import model.DescuentoAbsoluto;
+import model.DescuentoPorcentaje;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
 		
@@ -23,7 +25,6 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			} catch (Exception e) {
 				throw new MissingDataException(e);
 			}
-			
 		}
 
 	public List<Atraccion> findAll() {
@@ -32,7 +33,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -49,11 +50,11 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
-			
+
 			results.next();
-			
+
 			int total = results.getInt("TOTAL");
-			
+
 			return total;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
@@ -85,7 +86,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, t.getCupo());
 			statement.setInt(2, t.getIdAtraccion());
-			
+
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {
@@ -100,7 +101,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			PreparedStatement statement = conn.prepareStatement(query);
 
 			statement.setInt(1, t.getIdAtraccion());
-			
+
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {
@@ -116,9 +117,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(1, idAtraccion);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			Atraccion atraccion = null;
-			if(results.next()) {
+			if (results.next()) {
 				atraccion = toAtraccion(results);
 			}
 			return atraccion;
@@ -135,7 +136,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setString(1, nombre);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -154,7 +155,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(1, costo);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -173,7 +174,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setDouble(1, duracion);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -192,7 +193,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(1, cupo);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -211,7 +212,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setString(1, tipo);
 
 			ResultSet results = statement.executeQuery();
-			
+
 			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
@@ -220,6 +221,16 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<DescuentoPorcentaje> findByPorcentaje(int porcentaje) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -29,6 +29,8 @@ public class Usuario {
 		this.atraccionFavorita = atraccionFavorita;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;
+		
+		this.itinerarioUsuario = new ArrayList<Propuestas>();
 	}
 	
 	public Usuario(int idUsuario) {
@@ -37,6 +39,10 @@ public class Usuario {
 
 	public int getIdUsuario() {
 		return idUsuario;
+	}
+	
+	public int setIdUsuario(int id) {
+		return this.idUsuario = id;
 	}
 
 	public String getNombre() {

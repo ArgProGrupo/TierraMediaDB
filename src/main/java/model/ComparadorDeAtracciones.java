@@ -9,7 +9,6 @@ public class ComparadorDeAtracciones implements Comparator<Propuestas> {
 		this.favorito = favorito;
 	}
 
-	//@Override
 	public int compare(Propuestas at1, Propuestas at2) {
 		if (this.favorito == at1.getTipo() && this.favorito != at2.getTipo())
 			return -1;

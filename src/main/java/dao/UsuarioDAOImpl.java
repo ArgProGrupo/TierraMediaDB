@@ -9,7 +9,7 @@ import java.util.List;
 import jdbc.ConnectionProvider;
 import model.Usuario;
 
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioDAOImpl implements UsuarioDAO  {
 	
 	private Usuario toUsuario(ResultSet result) {
 		try {
@@ -92,13 +92,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public int delete(Usuario t) {
+	public int delete(Integer t) {
 		try {
 			String query = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
-
-			statement.setInt(1, t.getIdUsuario());
+			statement.setInt(1, t);
 			
 			int rows = statement.executeUpdate();
 			return rows;
@@ -215,6 +214,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	public int delete(Usuario t) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

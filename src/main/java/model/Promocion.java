@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Promocion extends Propuestas {
 	protected int idPromocion;
-	protected static int cantAtracciones;
+	protected int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
-	//protected double descuento;
+	protected int descuento;
 	
 	public Promocion(int idPromocion, String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
@@ -19,6 +19,16 @@ public class Promocion extends Propuestas {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.esPromo = true;
 //		this.promo = (ArrayList<Propuestas>) promo;
+		this.promo = new ArrayList<Propuestas>();
+	}
+		
+	public Promocion (String nombrePropuesta, int descuento) {
+		super(nombrePropuesta);
+		this.descuento = descuento;
+		this.promo = new ArrayList<Propuestas>();
+	}
+	public Promocion (String nombrePropuesta) {
+		super(nombrePropuesta);
 		this.promo = new ArrayList<Propuestas>();
 	}
 	

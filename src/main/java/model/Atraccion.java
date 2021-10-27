@@ -35,4 +35,5 @@ public class Atraccion extends Propuestas {
 	protected boolean esOContiene(Propuestas propuesta) {
 		return (this.equals(propuesta));
 	}
+	
 }
