@@ -19,6 +19,10 @@ public class DescuentoPorcentaje extends Promocion {
 		//this.promo = (ArrayList<Propuestas>) promo;
 	}
 	
+	public void setLista(ArrayList<Propuestas> a){
+		this.promo = a;
+	}
+	
 	public int getDescuento() {
 		return descuento;
 	}
@@ -42,7 +46,7 @@ public class DescuentoPorcentaje extends Promocion {
 	public String toString() {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() + "; Tiempo: " + getTiempo()
 				+ "; Cupo: " + getCupo() + "; Cantidad de atracciones: " + cantAtracciones + "; Descuento: "
-				+ descuento + " %";
+				+ descuento + " %" + "\n";
 	}
 
 	public int getCosto() {

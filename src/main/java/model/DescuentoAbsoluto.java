@@ -52,7 +52,7 @@ public class DescuentoAbsoluto extends Promocion {
 	public String toString() {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() + "; Tiempo: " + getTiempo()
 				+ "; Cupo: " + getCupo() + "; Cantidad de atracciones: " + getCantAtracciones() + "; Descuento: "
-				+ getDescuento() + " Monedas de oro";
+				+ getDescuento() + " Monedas de oro" + "\n";
 	}
 
 //	public int getCosto() {

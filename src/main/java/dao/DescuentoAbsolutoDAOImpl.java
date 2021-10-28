@@ -68,8 +68,16 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 	public List<Propuestas> findAll(List<Propuestas> a) {
 		try {
 			List<Propuestas> promoAbs = new LinkedList<Propuestas>();
-			List<Propuestas> promoAtracciones = new LinkedList<Propuestas>();
+			ArrayList<Propuestas> promoAtracciones = new ArrayList<Propuestas>();
+			DescuentoAbsoluto desc;
 
+			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
+
+			while (results.next()) {
+			
 			String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n"
 					+ "FROM pack_atracciones pa, promocion p \r\n"
 					+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
@@ -83,8 +91,13 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 						promoAtracciones.add(atrac);
 				}
 			}
+			desc = toDescuentoAbsoluto(results);
+			desc.setLista(promoAtracciones);;
+			promoAbs.add(desc);
+			
+			}
 			return promoAbs;
-		} catch (Exception e) {
+		}catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
