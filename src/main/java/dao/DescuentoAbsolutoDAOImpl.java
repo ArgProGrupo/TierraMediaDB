@@ -12,6 +12,7 @@ import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
 import model.DescuentoTresPorDos;
+import model.Propuestas;
 
 //public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 //
@@ -46,23 +47,40 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 			throw new MissingDataException(e);
 		}
 	}
-
-	public List<Atraccion> findAll(List<Atraccion> a) {
+	
+	public List<DescuentoAbsoluto> findAll() {
 		try {
+			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
 
-			List<Atraccion> promoAbs = new LinkedList<Atraccion>();
+			List<DescuentoAbsoluto> promoAbs = new LinkedList<DescuentoAbsoluto>();
+			while (results.next()) {
+				promoAbs.add(toDescuentoAbsoluto(results));
+			}
+			return promoAbs;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 
-			String query2 = "SELECT a.id_atraccion, p.id_promo \r\n"
-					+ "FROM atraccion a, pack_atracciones pa, promocion p \r\n"
-					+ "WHERE a.id_atraccion == pa.id_atraccion AND p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+	public List<Propuestas> findAll(List<Propuestas> a) {
+		try {
+			List<Propuestas> promoAbs = new LinkedList<Propuestas>();
+			List<Propuestas> promoAtracciones = new LinkedList<Propuestas>();
+
+			String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n"
+					+ "FROM pack_atracciones pa, promocion p \r\n"
+					+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
 			Connection conn2 = ConnectionProvider.getConnection();
 			PreparedStatement statement2 = conn2.prepareStatement(query2);
 			statement2.setInt(1,2);
 			ResultSet results2 = statement2.executeQuery();
 			while (results2.next()) {
-				for (Atraccion atrac : a) {
+				for (Propuestas atrac : a) {
 					if (atrac.getIdAtraccion() == results2.getInt(1))
-						promoAbs.add(atrac);
+						promoAtracciones.add(atrac);
 				}
 			}
 			return promoAbs;
@@ -229,21 +247,6 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 		return null;
 	}
 
-	public List<DescuentoAbsoluto> findAll() {
-		try {
-			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(query);
-			ResultSet results = statement.executeQuery();
-
-			List<DescuentoAbsoluto> promoAbs = new LinkedList<DescuentoAbsoluto>();
-			while (results.next()) {
-				promoAbs.add(toDescuentoAbsoluto(results));
-			}
-			return promoAbs;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
+	
 
 }

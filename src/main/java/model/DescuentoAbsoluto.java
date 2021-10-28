@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DescuentoAbsoluto extends Promocion {
 	private int descuento;
@@ -101,5 +102,8 @@ public class DescuentoAbsoluto extends Promocion {
 	}
 	public String setTipo(String tipo) {
 		return this.tipo = tipo;
+	}
+	public void setLista(ArrayList<Propuestas> a){
+		this.promo = a;
 	}
 }

@@ -10,6 +10,7 @@ import jdbc.ConnectionProvider;
 import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoTresPorDos;
+import model.Propuestas;
 
 public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 
@@ -50,10 +51,10 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 	}
 	
 
-	public List<Atraccion> findAll(List<Atraccion> atracciones) {
+	public List<Propuestas> findAll(List<Propuestas> atracciones) {
 		try {
 
-			List<Atraccion> promoAxB = new LinkedList<Atraccion>();			
+			List<Propuestas> promoAxB = new LinkedList<Propuestas>();			
 
 			String query2 = "SELECT a.id_atraccion, p.id_promo \r\n"
 					+ "FROM atraccion a, pack_atracciones pa, promocion p \r\n"
@@ -63,7 +64,7 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 			statement2.setInt(1,1);
 			ResultSet results2 = statement2.executeQuery();
 			while (results2.next()) {
-				for (Atraccion atrac : atracciones) {
+				for (Propuestas atrac : atracciones) {
 					if (atrac.getIdAtraccion() == results2.getInt(1))
 						promoAxB.add(atrac);
 				}
