@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
 import model.DescuentoTresPorDos;
+import model.Promocion;
+import model.Propuestas;
 
 public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 
@@ -36,29 +39,42 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	public List<Atraccion> findAll(List<Atraccion> a) {
+	public List<Propuestas> findAll(List<Propuestas> a) {
 		try {
+			List<Propuestas> promoPor = new LinkedList<Propuestas>();
+		ArrayList<Propuestas> promoAtracciones = new ArrayList<Propuestas>();
+		DescuentoPorcentaje desc;
 
-			List<Atraccion> promoAbs = new LinkedList<Atraccion>();
+		String query = "SELECT * FROM PROMOCION_PORCENTUAL";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(query);
+		ResultSet results = statement.executeQuery();
 
-			String query2 = "SELECT a.id_atraccion, p.id_promo \r\n"
-					+ "FROM atraccion a, pack_atracciones pa, promocion p \r\n"
-					+ "WHERE a.id_atraccion == pa.id_atraccion AND p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
-			Connection conn2 = ConnectionProvider.getConnection();
-			PreparedStatement statement2 = conn2.prepareStatement(query2);
-			statement2.setInt(1,3);
-			ResultSet results2 = statement2.executeQuery();
-			while (results2.next()) {
-				for (Atraccion atrac : a) {
-					if (atrac.getIdAtraccion() == results2.getInt(1))
-						promoAbs.add(atrac);
-				}
+		while (results.next()) {
+		
+		String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n"
+				+ "FROM pack_atracciones pa, promocion p \r\n"
+				+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+		Connection conn2 = ConnectionProvider.getConnection();
+		PreparedStatement statement2 = conn2.prepareStatement(query2);
+		statement2.setInt(1,3);
+		ResultSet results2 = statement2.executeQuery();
+		while (results2.next()) {
+			for (Propuestas atrac : a) {
+				if (atrac.getIdAtraccion() == results2.getInt(1))
+					promoAtracciones.add(atrac);
 			}
-			return promoAbs;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
 		}
+		desc = toDescuentoPorcentaje(results);
+		desc.setLista(promoAtracciones);;
+		promoPor.add(desc);
+		
+		}
+		return promoPor;
+	}catch (Exception e) {
+		throw new MissingDataException(e);
 	}
+}
 
 	public int countAll() {
 		try {
@@ -77,14 +93,14 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	public int insert(DescuentoPorcentaje t) {
+	public int insert(Propuestas t) {
 		try {
 			String query = "INSERT INTO PROMOCION_PORCENTUAL (NOMBRE_PACK, TIPO, DESCUENTO) VALUES (?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, t.getNombre());
 			statement.setString(2, t.getTipo());
-			statement.setDouble(3, t.getDescuento());
+			statement.setDouble(3, ((DescuentoAbsoluto) t).getDescuento());
 
 			int rows = statement.executeUpdate();
 			return rows;
@@ -93,12 +109,12 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	public int update(DescuentoPorcentaje t) {
+	public int update(Propuestas t) {
 		try {
 			String query = "UPDATE PROMOCION_PORCENTUAL SET PORCENTAJE = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setInt(1, t.getDescuento());
+			statement.setInt(1, ((DescuentoAbsoluto) t).getDescuento());
 
 			int rows = statement.executeUpdate();
 			return rows;
@@ -107,13 +123,13 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		}
 	}
 
-	public int delete(DescuentoPorcentaje t) {
+	public int delete(Propuestas t) {
 		try {
 			String query = "DELETE FROM PROMOCION_PORCENTUAL WHERE ID_ATRACCION = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 
-			statement.setInt(1, t.getIdPromocion());
+			statement.setInt(1, ((Promocion) t).getIdPromocion());
 
 			int rows = statement.executeUpdate();
 			return rows;
@@ -184,14 +200,14 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 		return null;
 	}
 
-	public List<DescuentoPorcentaje> findAll() {
+	public List<Propuestas> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
 
-			List<DescuentoPorcentaje> promoPor = new LinkedList<DescuentoPorcentaje>();
+			List<Propuestas> promoPor = new LinkedList<Propuestas>();
 			while (results.next()) {
 				promoPor.add(toDescuentoPorcentaje(results));
 			}

@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import jdbc.ConnectionProvider;
 import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoTresPorDos;
+import model.Propuestas;
 
 public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 
@@ -50,26 +52,39 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 	}
 	
 
-	public List<Atraccion> findAll(List<Atraccion> atracciones) {
+	public List<Propuestas> findAll(List<Propuestas> a) {
 		try {
+			List<Propuestas> promoAxB = new LinkedList<Propuestas>();
+			ArrayList<Propuestas> promoAtracciones = new ArrayList<Propuestas>();
+			DescuentoTresPorDos desc;
 
-			List<Atraccion> promoAxB = new LinkedList<Atraccion>();			
+			String query = "SELECT * FROM PROMOCION_AXB";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
 
-			String query2 = "SELECT a.id_atraccion, p.id_promo \r\n"
-					+ "FROM atraccion a, pack_atracciones pa, promocion p \r\n"
-					+ "WHERE a.id_atraccion == pa.id_atraccion AND p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+			while (results.next()) {
+			
+			String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n"
+					+ "FROM pack_atracciones pa, promocion p \r\n"
+					+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
 			Connection conn2 = ConnectionProvider.getConnection();
 			PreparedStatement statement2 = conn2.prepareStatement(query2);
 			statement2.setInt(1,1);
 			ResultSet results2 = statement2.executeQuery();
 			while (results2.next()) {
-				for (Atraccion atrac : atracciones) {
+				for (Propuestas atrac : a) {
 					if (atrac.getIdAtraccion() == results2.getInt(1))
-						promoAxB.add(atrac);
+						promoAtracciones.add(atrac);
 				}
 			}
+			desc = toDescuentoTresPorDos(results);
+			desc.setLista(promoAtracciones);;
+			promoAxB.add(desc);
+			
+			}
 			return promoAxB;
-		} catch (Exception e) {
+		}catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}

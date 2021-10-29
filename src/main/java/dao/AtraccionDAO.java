@@ -3,8 +3,9 @@ package dao;
 import java.util.List;
 
 import model.Atraccion;
+import model.Propuestas;
 
-public interface AtraccionDAO extends GenericDAO<Atraccion> {
+public interface AtraccionDAO extends GenericDAO<Propuestas> {
 	
 	public abstract Atraccion findByIdAtraccion(int idAtraccion);
 	public abstract List<Atraccion> findByNombre(String nombre);

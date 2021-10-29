@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DescuentoAbsoluto extends Promocion {
 	private int descuento;
@@ -51,7 +52,7 @@ public class DescuentoAbsoluto extends Promocion {
 	public String toString() {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() + "; Tiempo: " + getTiempo()
 				+ "; Cupo: " + getCupo() + "; Cantidad de atracciones: " + getCantAtracciones() + "; Descuento: "
-				+ getDescuento() + " Monedas de oro";
+				+ getDescuento() + " Monedas de oro" + "\n";
 	}
 
 //	public int getCosto() {
@@ -101,5 +102,8 @@ public class DescuentoAbsoluto extends Promocion {
 	}
 	public String setTipo(String tipo) {
 		return this.tipo = tipo;
+	}
+	public void setLista(ArrayList<Propuestas> a){
+		this.promo = a;
 	}
 }
