@@ -100,5 +100,9 @@ public class Promocion extends Propuestas {
 			   " | tipo " + tipo + " | Cantidad de atracciones: " + cantAtracciones + "\n";
 	}
 	
+	public ArrayList<Propuestas> getPromoList(){
+		return promo;
+		
+	}
 	
 }

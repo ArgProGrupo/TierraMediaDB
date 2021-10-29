@@ -85,7 +85,8 @@ public class App {
 		DescuentoTresPorDosDAO DescuentoTresPorDosDAO = FactoryDAO.getDescuentoTresPorDos();
 		List<Propuestas> descAxB = new ArrayList<Propuestas>();
 		descAxB = DescuentoTresPorDosDAO.findAll(atracciones);
-//		System.out.println(descAxB);
+//		for (Propuestas p : descAxB) {
+//			System.out.println(p.);
 
 //		System.out.println(DescuentoAbsolutoDAO.findAll());
 //		System.out.println(DescuentoPorcentajeDAO.findAll());
@@ -131,9 +132,11 @@ public class App {
 						System.out.println("Compraste " + a + "\n");
 						u.comprarPropuesta(a);
 						a.restarCupo();
+						
 					}
 				}
 			}
+			usuarioDAO.saveItinerario(u);
 			System.out.println("Gracias " + u.getNombre() + " por elegir y confiar en TierraMediaExpeditions.\n"
 					+ "A continuación podrá observar su itinerario: \n" + "\nIntinerario de " + u.getNombre() + "\n");
 			System.out.println(u.getItinerarioString());

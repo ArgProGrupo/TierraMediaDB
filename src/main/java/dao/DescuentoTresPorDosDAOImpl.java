@@ -24,7 +24,7 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 			Connection conn2 = ConnectionProvider.getConnection();
 			PreparedStatement statement2 = conn2.prepareStatement(query2);
 			ResultSet results2 = statement2.executeQuery();
-			paxb.setCosto(results2.getInt(2));
+			
 			paxb.setTiempo(results2.getDouble(3));
 			paxb.setCupo(results2.getInt(4));
 			paxb.setTipo(results2.getString(6));
@@ -44,7 +44,9 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 					results.getInt(5), 
 					results.getString(6));
 			paxb.setAtraccionGratis(atraccionGratis);
-
+			
+			paxb.setCosto(results2.getInt(2));
+			
 			return paxb;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
