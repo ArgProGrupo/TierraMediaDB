@@ -19,6 +19,10 @@ public class Atraccion extends Propuestas {
 		this.idAtraccion = idAtraccion;
 	}
 	
+	public String getTipo() {
+		return this.tipo;
+	}
+	
 	
 	public int getIdAtraccion() {
 		return this.idAtraccion;
