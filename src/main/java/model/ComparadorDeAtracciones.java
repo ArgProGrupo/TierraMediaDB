@@ -10,9 +10,9 @@ public class ComparadorDeAtracciones implements Comparator<Propuestas> {
 	}
 
 	public int compare(Propuestas at1, Propuestas at2) {
-		if (this.favorito == at1.getTipo() && this.favorito != at2.getTipo())
+		if (this.favorito.compareTo(at1.getTipo()) == 0 && this.favorito.compareTo(at2.getTipo()) != 0)
 			return -1;
-		else if (this.favorito != at1.getTipo() && this.favorito == at2.getTipo())
+		else if (this.favorito.compareTo(at1.getTipo()) != 0 && this.favorito.compareTo(at2.getTipo()) == 0)
 			return 1;
 		else {
 			if (at1.esPromo == true && at2.esPromo != true)
