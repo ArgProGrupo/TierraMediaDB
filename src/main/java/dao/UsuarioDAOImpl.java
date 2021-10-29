@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public List<Propuestas> saveItinerario(Usuario u) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	public ArrayList<Propuestas> saveItinerario(Usuario u) throws SQLException {
+		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
@@ -55,8 +56,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			for (Propuestas comprada : u.itinerarioUsuario) {
 				String query2 = "INSERT INTO ITINERARIO (ID_USUARIO, ID_ATRACCION, ID_PROMOCION) VALUES (?, ?, ?)";
-				Connection conn2 = ConnectionProvider.getConnection();
-				PreparedStatement statement2 = conn2.prepareStatement(query2);
+				PreparedStatement statement2 = conn.prepareStatement(query2);
 				statement2.setInt(1, u.getIdUsuario());
 				statement2.setInt(2, comprada.getIdAtraccion());
 				statement2.setInt(3, comprada.getIdPromocion());
@@ -64,8 +64,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 //			INSERT ITINERARIO
 				String query3 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
-				Connection conn3 = ConnectionProvider.getConnection();
-				PreparedStatement statement3 = conn3.prepareStatement(query3);
+				PreparedStatement statement3 = conn.prepareStatement(query3);
 				statement3.setInt(1, comprada.getCupo());
 				statement3.setInt(2, comprada.getIdAtraccion());
 				statement3.executeUpdate();
