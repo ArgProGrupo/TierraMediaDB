@@ -62,7 +62,7 @@ public class App {
 ////		System.out.println(usuarioDAO.insert(Sofi));
 ////		System.out.println(Sofi.delete(6));
 //		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
-		List<Propuestas> atracciones = new ArrayList<Propuestas>();
+//		List<Propuestas> atracciones = new ArrayList<Propuestas>();
 //		atracciones = atraccionDAO.findAll();// agregar una varriable y guardar en variable
 //		 System.out.println(atracciones);
 //		 System.out.println(atraccionDAO.findByIdAtraccion(2));
@@ -113,17 +113,10 @@ public class App {
 		propuestas.addAll(descAb);
 		propuestas.addAll(descPor);
 		propuestas.addAll(descAxB);
-//		propuestas.add(descAb.get(0));
-//		propuestas.add(descPor.get(0));
-//		propuestas.add(descAxB.get(0));
 		List<Usuario> usuarios = new LinkedList<Usuario>();
 
 //		System.out.println(propuestas);
 		usuarios = usuarioDAO.findAll();
-
-//		Usuario alvaro = new Usuario ("alvaro", "AVENTURA", 300, 8.0);
-//		Usuario alvaro1 = new Usuario ("alvaro", "PAISAJE", 300, 8.0);
-//		System.out.println(alvaro1.getTipoAtraccionFavorita().compareTo(alvaro.getTipoAtraccionFavorita()));
 
 		Scanner scanner = new Scanner(System.in);
 
