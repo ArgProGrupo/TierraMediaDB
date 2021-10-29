@@ -3,6 +3,7 @@ package model;
 import java.util.Objects;
 
 public abstract class Propuestas {
+	protected int idPromocion;
 	protected int idAtraccion;
 	protected String nombrePropuesta;
 	protected int costo;
@@ -91,10 +92,18 @@ public abstract class Propuestas {
 			this.cupo--;
 			System.out.println("El cupo disponible para esta atracci�n es de " + cupo + "\n ------------------------");
 		}
-		return cupo;
+		return this.cupo;
 
+	}
+	
+	public boolean getEsPromo() {
+		return this.esPromo;
 	}
 
 	protected abstract boolean esOContiene(Propuestas propuesta);
+
+	public int getIdPromocion() {
+		return this.idPromocion;
+	}
 
 }

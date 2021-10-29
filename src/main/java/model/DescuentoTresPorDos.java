@@ -99,11 +99,11 @@ public class DescuentoTresPorDos extends Promocion {
 	public String toString() {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() +
 				"; Tiempo: " + getTiempo() + "; Cupo: " + getCupo() + 
-				"; Cantidad de atracciones: " +	getCantAtracciones() + 
+				"; Cantidad de atracciones: " +	promo.size() + 
 				"; Atraccion de regalo: " + atraccionGratis.getNombre() + "\n";
 	}
 	public int setCosto(int costo) {
-		return this.costo = costo;	
+		return this.costo = (costo - atraccionGratis.getCosto());	
 	}
 	public double setTiempo(double tiempo) {
 		return this.tiempo = tiempo;
@@ -126,6 +126,5 @@ public class DescuentoTresPorDos extends Promocion {
 
 	public Propuestas setAtraccionGratis(Atraccion atraccionGratis) {
 		return this.atraccionGratis = atraccionGratis;
-		
 	}
 }
