@@ -64,14 +64,14 @@ public class App {
 		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
 		List<Propuestas> atracciones = new ArrayList<Propuestas>();
 		atracciones = atraccionDAO.findAll();// agregar una varriable y guardar en variable
-//		System.out.println(atracciones);
-////		System.out.println(atraccionDAO.findByIdAtraccion(2));
-////		System.out.println(atraccionDAO.findByNombre("Moria"));
-////		System.out.println(atraccionDAO.findByCupo(25));
-////		System.out.println(atraccionDAO.findByCosto(25));
-////		System.out.println(atraccionDAO.findByTipo("AVENTURA"));
-////		System.out.println(atraccionDAO.findByDuracion(6.5));
-////		
+//		 System.out.println(atracciones);
+//		 System.out.println(atraccionDAO.findByIdAtraccion(2));
+//		 System.out.println(atraccionDAO.findByNombre("Moria"));
+//		 System.out.println(atraccionDAO.findByCupo(25));
+//		 System.out.println(atraccionDAO.findByCosto(25));
+//		 System.out.println(atraccionDAO.findByTipo("AVENTURA"));
+//		 System.out.println(atraccionDAO.findByDuracion(6.5));
+//		
 		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
 		List<Propuestas> descAb = new ArrayList<Propuestas>();
 		descAb = DescuentoAbsolutoDAO.findAll(atracciones);
@@ -104,6 +104,10 @@ public class App {
 
 		System.out.println(propuestas);
 		usuarios = usuarioDAO.findAll();
+
+//		Usuario alvaro = new Usuario ("alvaro", "AVENTURA", 300, 8.0);
+//		Usuario alvaro1 = new Usuario ("alvaro", "PAISAJE", 300, 8.0);
+//		System.out.println(alvaro1.getTipoAtraccionFavorita().compareTo(alvaro.getTipoAtraccionFavorita()));
 
 		Scanner scanner = new Scanner(System.in);
 
@@ -138,5 +142,4 @@ public class App {
 		scanner.close();
 		
 	}
-
 }

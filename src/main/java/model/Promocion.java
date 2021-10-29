@@ -26,15 +26,18 @@ public class Promocion extends Propuestas {
 		super(nombrePropuesta);
 		this.descuento = descuento;
 		this.promo = new ArrayList<Propuestas>();
+		this.esPromo = true;
 	}
 	public Promocion (String nombrePropuesta) {
 		super(nombrePropuesta);
 		this.promo = new ArrayList<Propuestas>();
+		this.esPromo = true;
 	}
 	
 	public Promocion(int idPromocion) {
 		super();
 		this.idPromocion = idPromocion;
+		this.esPromo = true;
 	}
 	
 	public int getIdPromocion() {
