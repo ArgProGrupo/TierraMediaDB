@@ -10,6 +10,7 @@ import jdbc.ConnectionProvider;
 import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
+import model.Propuestas;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
 		
@@ -27,14 +28,14 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			}
 		}
 
-	public List<Atraccion> findAll() {
+	public List<Propuestas> findAll() {
 		try {
 			String query = "SELECT * FROM ATRACCION";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
 
-			List<Atraccion> atraccion = new LinkedList<Atraccion>();
+			List<Propuestas> atraccion = new LinkedList<Propuestas>();
 			while (results.next()) {
 				atraccion.add(toAtraccion(results));
 			}
@@ -61,7 +62,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
-	public int insert(Atraccion t) {
+	public int insert(Propuestas t) {
 		try {
 			String query = "INSERT INTO ATRACCION (NOMBRE, COSTO, DURACION, CUPO, TIPO) VALUES (?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
@@ -79,7 +80,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
-	public int update(Atraccion t) {
+	public int update(Propuestas t) {
 		try {
 			String query = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -94,7 +95,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
-	public int delete(Atraccion t) {
+	public int delete(Propuestas t) {
 		try {
 			String query = "DELETE FROM ATRACCION WHERE ID_ATRACCION = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -232,5 +233,6 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

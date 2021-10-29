@@ -56,6 +56,10 @@ public class DescuentoTresPorDos extends Promocion {
 		}
 		return atraccionGratis.idAtraccion;
 	}
+	
+	public void setLista(ArrayList<Propuestas> a){
+		this.promo = a;
+	}
 
 	@Override
 	public int calcularCosto() {
@@ -96,7 +100,7 @@ public class DescuentoTresPorDos extends Promocion {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() +
 				"; Tiempo: " + getTiempo() + "; Cupo: " + getCupo() + 
 				"; Cantidad de atracciones: " +	getCantAtracciones() + 
-				"; Atraccion de regalo: " + atraccionGratis.getNombre();
+				"; Atraccion de regalo: " + atraccionGratis.getNombre() + "\n";
 	}
 	public int setCosto(int costo) {
 		return this.costo = costo;	
