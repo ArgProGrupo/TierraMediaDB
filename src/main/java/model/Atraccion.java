@@ -3,6 +3,7 @@ package model;
 public class Atraccion extends Propuestas {
 	private int idAtraccion;
 	
+	
 	public Atraccion(int idAtraccion, String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
 		super(nombrePropuesta, costo, tiempo, cupo, tipo);
 		this.idAtraccion = idAtraccion;
@@ -17,6 +18,7 @@ public class Atraccion extends Propuestas {
 	public Atraccion(int idAtraccion) {
 		super();
 		this.idAtraccion = idAtraccion;
+		this.esPromo = false;
 	}
 	
 	public String getTipo() {

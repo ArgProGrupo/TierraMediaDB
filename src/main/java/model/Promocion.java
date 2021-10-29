@@ -3,6 +3,7 @@ package model;
 import java.util.*;
 
 public class Promocion extends Propuestas {
+	
 	protected int idPromocion;
 	protected int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
@@ -11,13 +12,11 @@ public class Promocion extends Propuestas {
 	public Promocion(int idPromocion, String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.idPromocion = idPromocion;
-		this.esPromo = true;
 		this.promo = new ArrayList<Propuestas>();
 	}
 
 	public Promocion(String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
-		this.esPromo = true;
 //		this.promo = (ArrayList<Propuestas>) promo;
 		this.promo = new ArrayList<Propuestas>();
 	}
@@ -26,18 +25,15 @@ public class Promocion extends Propuestas {
 		super(nombrePropuesta);
 		this.descuento = descuento;
 		this.promo = new ArrayList<Propuestas>();
-		this.esPromo = true;
 	}
 	public Promocion (String nombrePropuesta) {
 		super(nombrePropuesta);
 		this.promo = new ArrayList<Propuestas>();
-		this.esPromo = true;
 	}
 	
 	public Promocion(int idPromocion) {
 		super();
 		this.idPromocion = idPromocion;
-		this.esPromo = true;
 	}
 	
 	public int getIdPromocion() {
@@ -104,5 +100,4 @@ public class Promocion extends Propuestas {
 		return promo;
 		
 	}
-	
 }

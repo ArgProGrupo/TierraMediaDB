@@ -16,6 +16,7 @@ public class DescuentoPorcentaje extends Promocion {
 	public DescuentoPorcentaje(String nombrePropuesta, int descuento) {
 		super(nombrePropuesta, descuento);
 		this.descuento = descuento;
+		this.esPromo = true;
 		//this.promo = (ArrayList<Propuestas>) promo;
 	}
 	
@@ -45,7 +46,7 @@ public class DescuentoPorcentaje extends Promocion {
 	@Override
 	public String toString() {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() + "; Tiempo: " + getTiempo()
-				+ "; Cupo: " + getCupo() + "; Cantidad de atracciones: " + cantAtracciones + "; Descuento: "
+				+ "; Cupo: " + calcularCupo() + "; Cantidad de atracciones: " + cantAtracciones + "; Descuento: "
 				+ descuento + " %" + "\n";
 	}
 
@@ -85,5 +86,8 @@ public class DescuentoPorcentaje extends Promocion {
 	}
 	public String setTipo(String tipo) {
 		return this.tipo = tipo; 
+	}
+	public int setIdPromo(int id) {
+		return this.idPromocion = id;
 	}
 }

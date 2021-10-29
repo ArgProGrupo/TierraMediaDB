@@ -18,17 +18,17 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 	private DescuentoTresPorDos toDescuentoTresPorDos(ResultSet result) {
 		try {
 			DescuentoTresPorDos paxb = new DescuentoTresPorDos(result.getString(2), result.getInt(3));
-			String query2 = "SELECT p.nombre_promo, sum(a.costo)  AS 'costo', sum(a.duracion) AS 'duracion_total' , min(a.cupo) AS 'cupo', id_atraccion_gratis AS 'id_atraccion_gratis', a.tipo AS 'tipo', p.cant_atracciones \r\n"
+			String query2 = "SELECT p.id_promo, p.nombre_promo, sum(a.costo)  AS 'costo', sum(a.duracion) AS 'duracion_total' , min(a.cupo) AS 'cupo', id_atraccion_gratis AS 'id_atraccion_gratis', a.tipo AS 'tipo', p.cant_atracciones \r\n"
 					+ "FROM promocion p, pack_atracciones pa , atraccion a, promocion_AxB paxb \r\n"
 					+ "WHERE p.id_promo == pa.id_promocion AND a.id_atraccion == pa.id_atraccion AND p.nombre_promo LIKE '%PAISAJE%' \r\n";
 			Connection conn2 = ConnectionProvider.getConnection();
 			PreparedStatement statement2 = conn2.prepareStatement(query2);
 			ResultSet results2 = statement2.executeQuery();
-			
-			paxb.setTiempo(results2.getDouble(3));
-			paxb.setCupo(results2.getInt(4));
-			paxb.setTipo(results2.getString(6));
-			paxb.setCantAtracciones(results2.getInt(7));
+			paxb.setIdPromo(results2.getInt(1));
+			paxb.setTiempo(results2.getDouble(4));
+			paxb.setCupo(results2.getInt(5));
+			paxb.setTipo(results2.getString(7));
+			paxb.setCantAtracciones(results2.getInt(8));
 			
 			String query = "SELECT a.* \r\n"
 					+ "FROM atraccion a, promocion_AxB paxb \r\n"
@@ -45,7 +45,7 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 					results.getString(6));
 			paxb.setAtraccionGratis(atraccionGratis);
 			
-			paxb.setCosto(results2.getInt(2));
+			paxb.setCosto(results2.getInt(3));
 			
 			return paxb;
 		} catch (Exception e) {

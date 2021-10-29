@@ -29,6 +29,7 @@ public class DescuentoTresPorDos extends Promocion {
 	public DescuentoTresPorDos(String nombrePropuesta,  int idAtraccionGratis) {
 		super(nombrePropuesta);
 		this.idAtraccionGratis = idAtraccionGratis;
+		this.esPromo = true;
 	}
 
 	public Propuestas getAtraccionGratis() {
@@ -110,5 +111,8 @@ public class DescuentoTresPorDos extends Promocion {
 
 	public Propuestas setAtraccionGratis(Atraccion atraccionGratis) {
 		return this.atraccionGratis = atraccionGratis;
+	}
+	public int setIdPromo(int id) {
+		return this.idPromocion = id;
 	}
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public abstract class Propuestas {
@@ -104,6 +105,10 @@ public abstract class Propuestas {
 
 	public int getIdPromocion() {
 		return this.idPromocion;
+	}
+
+	public ArrayList<Propuestas> getPromoList() {
+		return null;
 	}
 
 }

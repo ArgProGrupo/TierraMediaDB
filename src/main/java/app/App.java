@@ -91,7 +91,7 @@ public class App {
 //		System.out.println(DescuentoAbsolutoDAO.findAll());
 //		System.out.println(DescuentoPorcentajeDAO.findAll());
 //		System.out.println(DescuentoTresPorDosDAO.findAll());
-		
+
 		PromocionDAO promocionDAO = FactoryDAO.getPromocionDAO();
 		UsuarioDAO usuarioDAO = FactoryDAO.getUsuarioDAO();
 		DescuentoTresPorDosDAO DescuentoTresPorDosDAO = FactoryDAO.getDescuentoTresPorDos();
@@ -100,17 +100,16 @@ public class App {
 		List<Propuestas> descPor = new ArrayList<Propuestas>();
 		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
 		List<Propuestas> descAb = new ArrayList<Propuestas>();
-		
+
 		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
-		
-		
+
 		propuestas = new ArrayList<Propuestas>();
 		propuestas = atraccionDAO.findAll();
-		
+
 		descAxB = DescuentoTresPorDosDAO.findAll(propuestas);
 		descPor = DescuentoPorcentajeDAO.findAll(propuestas);
 		descAb = DescuentoAbsolutoDAO.findAll(propuestas);
-				
+
 		propuestas.addAll(descAb);
 		propuestas.addAll(descPor);
 		propuestas.addAll(descAxB);
@@ -119,7 +118,7 @@ public class App {
 //		propuestas.add(descAxB.get(0));
 		List<Usuario> usuarios = new LinkedList<Usuario>();
 
-		System.out.println(propuestas);
+//		System.out.println(propuestas);
 		usuarios = usuarioDAO.findAll();
 
 //		Usuario alvaro = new Usuario ("alvaro", "AVENTURA", 300, 8.0);
@@ -148,7 +147,6 @@ public class App {
 						System.out.println("Compraste " + a + "\n");
 						u.comprarPropuesta(a);
 						a.restarCupo();
-						
 					}
 				}
 			}
