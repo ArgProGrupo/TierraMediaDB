@@ -61,22 +61,22 @@ public class Usuario {
 		return this.atraccionFavorita;
 	}
 
-	public void itinerarioUsuario(List<Propuestas> itinerario) {
-		File f = new File("archivos/itinerarioUsuario.txt");
-
-		PrintWriter pw;
-
-		try {
-			pw = new PrintWriter(f);
-
-			for (Propuestas v : itinerario)
-				pw.write(v.toString() + "\n");
-
-			pw.close();
-		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-		}
-	}
+//	public void itinerarioUsuario(List<Propuestas> itinerario) {
+//		File f = new File("archivos/itinerarioUsuario.txt");
+//
+//		PrintWriter pw;
+//
+//		try {
+//			pw = new PrintWriter(f);
+//
+//			for (Propuestas v : itinerario)
+//				pw.write(v.toString() + "\n");
+//
+//			pw.close();
+//		} catch (FileNotFoundException e) {
+//			System.err.println(e.getMessage());
+//		}
+//	}
 
 	public String getItinerarioString() {
 		String itinerario = "";

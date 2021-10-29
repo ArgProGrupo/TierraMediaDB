@@ -81,7 +81,12 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 				}
 			}
 			desc = toDescuentoTresPorDos(results);
-			desc.setLista(promoAtracciones);;
+			desc.setLista(promoAtracciones);
+			for (Propuestas atrac2 : promoAtracciones) {
+				if(atrac2.getCupo() <= desc.getCupo()) {
+					desc.setCupo(atrac2.getCupo());
+				}
+			}
 			promoAxB.add(desc);
 			
 			}

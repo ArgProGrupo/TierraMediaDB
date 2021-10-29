@@ -46,7 +46,7 @@ public class App {
 //			DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
 ////		System.out.println(DescuentoAbsolutoDAO.findAll());
 //		
-		PromocionDAO promocionDAO = FactoryDAO.getPromocionDAO();
+//		PromocionDAO promocionDAO = FactoryDAO.getPromocionDAO();
 //		//System.out.println(promocionDAO.findAll());
 //	
 //	
@@ -61,9 +61,9 @@ public class App {
 ////		Usuario Facu = new Usuario ("Facu", 100, 1.0);
 ////		System.out.println(usuarioDAO.insert(Sofi));
 ////		System.out.println(Sofi.delete(6));
-		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
+//		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
 		List<Propuestas> atracciones = new ArrayList<Propuestas>();
-		atracciones = atraccionDAO.findAll();// agregar una varriable y guardar en variable
+//		atracciones = atraccionDAO.findAll();// agregar una varriable y guardar en variable
 //		 System.out.println(atracciones);
 //		 System.out.println(atraccionDAO.findByIdAtraccion(2));
 //		 System.out.println(atraccionDAO.findByNombre("Moria"));
@@ -72,29 +72,45 @@ public class App {
 //		 System.out.println(atraccionDAO.findByTipo("AVENTURA"));
 //		 System.out.println(atraccionDAO.findByDuracion(6.5));
 //		
-		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
-		List<Propuestas> descAb = new ArrayList<Propuestas>();
-		descAb = DescuentoAbsolutoDAO.findAll(atracciones);
+//		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
+//		List<Propuestas> descAb = new ArrayList<Propuestas>();
+//		descAb = DescuentoAbsolutoDAO.findAll(atracciones);
 //		System.out.println(descAb);
 
-		DescuentoPorcentajeDAO DescuentoPorcentajeDAO = FactoryDAO.getDescuentoPorcentajeDAO();
-		List<Propuestas> descPor = new ArrayList<Propuestas>();
-		descPor = DescuentoPorcentajeDAO.findAll(atracciones);
+//		DescuentoPorcentajeDAO DescuentoPorcentajeDAO = FactoryDAO.getDescuentoPorcentajeDAO();
+//		List<Propuestas> descPor = new ArrayList<Propuestas>();
+//		descPor = DescuentoPorcentajeDAO.findAll(atracciones);
 //		System.out.println(descPor);
 
-		DescuentoTresPorDosDAO DescuentoTresPorDosDAO = FactoryDAO.getDescuentoTresPorDos();
-		List<Propuestas> descAxB = new ArrayList<Propuestas>();
-		descAxB = DescuentoTresPorDosDAO.findAll(atracciones);
+//		DescuentoTresPorDosDAO DescuentoTresPorDosDAO = FactoryDAO.getDescuentoTresPorDos();
+//		List<Propuestas> descAxB = new ArrayList<Propuestas>();
+//		descAxB = DescuentoTresPorDosDAO.findAll(atracciones);
 //		for (Propuestas p : descAxB) {
 //			System.out.println(p.);
 
 //		System.out.println(DescuentoAbsolutoDAO.findAll());
 //		System.out.println(DescuentoPorcentajeDAO.findAll());
 //		System.out.println(DescuentoTresPorDosDAO.findAll());
-
+		
+		PromocionDAO promocionDAO = FactoryDAO.getPromocionDAO();
 		UsuarioDAO usuarioDAO = FactoryDAO.getUsuarioDAO();
+		DescuentoTresPorDosDAO DescuentoTresPorDosDAO = FactoryDAO.getDescuentoTresPorDos();
+		List<Propuestas> descAxB = new ArrayList<Propuestas>();
+		DescuentoPorcentajeDAO DescuentoPorcentajeDAO = FactoryDAO.getDescuentoPorcentajeDAO();
+		List<Propuestas> descPor = new ArrayList<Propuestas>();
+		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
+		List<Propuestas> descAb = new ArrayList<Propuestas>();
+		
+		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
+		
+		
 		propuestas = new ArrayList<Propuestas>();
 		propuestas = atraccionDAO.findAll();
+		
+		descAxB = DescuentoTresPorDosDAO.findAll(propuestas);
+		descPor = DescuentoPorcentajeDAO.findAll(propuestas);
+		descAb = DescuentoAbsolutoDAO.findAll(propuestas);
+				
 		propuestas.addAll(descAb);
 		propuestas.addAll(descPor);
 		propuestas.addAll(descAxB);

@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import model.Atraccion;
 import model.Propuestas;
 import model.Usuario;
 
@@ -63,11 +64,35 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				statement2.executeUpdate();
 
 //			INSERT ITINERARIO
-				String query3 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
-				PreparedStatement statement3 = conn.prepareStatement(query3);
-				statement3.setInt(1, comprada.getCupo());
-				statement3.setInt(2, comprada.getIdAtraccion());
-				statement3.executeUpdate();
+				if (!comprada.getEsPromo()) {
+					String query3 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
+					PreparedStatement statement3 = conn.prepareStatement(query3);
+					statement3.setInt(1, comprada.getCupo());
+					statement3.setInt(2, comprada.getIdAtraccion());
+					statement3.executeUpdate();
+				}
+				if (comprada.getEsPromo()) {
+					String query4 = "SELECT p.id_promo, group_concat(id_atraccion) AS 'ID_ATRACCIONES' \r\n"
+							+ "FROM promocion p  JOIN pack_atracciones pa ON pa.id_promocion = p.id_promo \r\n"
+							+ "WHERE id_promo = ? \r\n" + "GROUP BY p.id_promo \r\n";
+					PreparedStatement statement4 = conn.prepareStatement(query4);
+					statement4.setInt(1, comprada.getIdPromocion());
+					ResultSet results = statement4.executeQuery();
+					String linea = results.getString(2);
+					String[] ids = linea.split(",");
+					List<Integer> atracc = new ArrayList<Integer>();
+					for (String id : ids) {
+						int at = Integer.parseInt(id);
+						atracc.add(at);
+					}
+					for (int a : atracc) {
+						String query5 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
+						PreparedStatement statement5 = conn.prepareStatement(query5);
+						statement5.setInt(1, comprada.getCupo());
+						statement5.setInt(2, a);
+						statement5.executeUpdate();
+					}
+				}
 //			UPDATE ATRACCION
 			}
 		} catch (SQLException e) {
