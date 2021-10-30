@@ -21,7 +21,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-
 	}
 
 	public List<Usuario> findAll() {
@@ -269,11 +268,4 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
-
-	@Override
-	public List<Propuestas> findAll(List<Propuestas> a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

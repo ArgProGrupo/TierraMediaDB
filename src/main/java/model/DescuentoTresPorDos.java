@@ -3,30 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-//import administradorDeArchivos.ListaPropuestas;
-
 public class DescuentoTresPorDos extends Promocion {
 	public Propuestas atraccionGratis;
 	public int idAtraccionGratis;
-//	public int idAtraccion1;
-//	public int idAtraccion2;
 
-//	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int cantAtracciones,
-//			Propuestas atraccionGratis, List<Propuestas> promo) {
-//		super(nombrePropuesta, tipo, cantAtracciones);
-//		this.promo = (ArrayList<Propuestas>) promo;
-//		this.atraccionGratis = atraccionGratis;
-//	}
-	
-//	public DescuentoTresPorDos(String nombrePropuesta, String tipo, int cantAtracciones) {
-//		super(nombrePropuesta, tipo, cantAtracciones);
-////		idAtraccion1 = this.idAtraccion1;
-////		idAtraccion2 = this.idAtraccion2;
-////		this.idAtraccionGratis = idAtraccionGratis;
-//		this.promo = (ArrayList<Propuestas>) promo;
-//	}
-
-	public DescuentoTresPorDos(String nombrePropuesta,  int idAtraccionGratis) {
+	public DescuentoTresPorDos(String nombrePropuesta, int idAtraccionGratis) {
 		super(nombrePropuesta);
 		this.idAtraccionGratis = idAtraccionGratis;
 		this.esPromo = true;
@@ -34,7 +15,7 @@ public class DescuentoTresPorDos extends Promocion {
 
 	public Propuestas getAtraccionGratis() {
 		List<Propuestas> propuestas = new ArrayList<Propuestas>();
-		//ListaPropuestas.leerAtraccion();
+		// ListaPropuestas.leerAtraccion();
 		for (Propuestas a : propuestas) {
 			if (a.getNombre().equals(atraccionGratis.getNombre())) {
 
@@ -44,10 +25,9 @@ public class DescuentoTresPorDos extends Promocion {
 		}
 		return atraccionGratis;
 	}
-	
+
 	public int getIdAtraccionGratis() {
 		List<Propuestas> propuestas = new ArrayList<Propuestas>();
-		//ListaPropuestas.leerAtraccion();
 		for (Propuestas a : propuestas) {
 			if (a.getNombre().equals(atraccionGratis.getNombre())) {
 
@@ -57,8 +37,8 @@ public class DescuentoTresPorDos extends Promocion {
 		}
 		return atraccionGratis.idAtraccion;
 	}
-	
-	public void setLista(ArrayList<Propuestas> a){
+
+	public void setLista(ArrayList<Propuestas> a) {
 		this.promo = a;
 	}
 
@@ -82,29 +62,35 @@ public class DescuentoTresPorDos extends Promocion {
 
 	@Override
 	public String toString() {
-		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() +
-				"; Tiempo: " + getTiempo() + "; Cupo: " + calcularCupo() + 
-				"; Cantidad de atracciones: " +	promo.size() + 
-				"; Atraccion de regalo: " + atraccionGratis.getNombre() + "\n";
+		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() + "; Tiempo: " + getTiempo() + "; Cupo: "
+				+ calcularCupo() + "; Cantidad de atracciones: " + promo.size() + "; Atraccion de regalo: "
+				+ atraccionGratis.getNombre() + "\n";
 	}
+
 	public int setCosto(int costo) {
-		return this.costo = (costo - atraccionGratis.getCosto());	
+		return this.costo = (costo - atraccionGratis.getCosto());
 	}
+
 	public double setTiempo(double tiempo) {
 		return this.tiempo = tiempo;
 	}
+
 	public int setCupo(int cupo) {
 		return this.cupo = cupo;
 	}
+
 	public int getCantAtracciones() {
 		return this.cantAtracciones;
 	}
+
 	public int setCantAtracciones(int cant) {
 		return this.cantAtracciones = cant;
 	}
+
 	public String setTipo(String tipo) {
 		return this.tipo = tipo;
 	}
+
 	public int setIdAtracccionGratis(int idAtraccionGratis) {
 		return this.idAtraccionGratis = idAtraccionGratis;
 	}
@@ -112,6 +98,7 @@ public class DescuentoTresPorDos extends Promocion {
 	public Propuestas setAtraccionGratis(Atraccion atraccionGratis) {
 		return this.atraccionGratis = atraccionGratis;
 	}
+
 	public int setIdPromo(int id) {
 		return this.idPromocion = id;
 	}
