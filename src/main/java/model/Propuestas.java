@@ -21,7 +21,7 @@ public abstract class Propuestas {
 		this.cupo = cupo;
 		this.tipo = tipo;
 	}
-	
+
 	public Propuestas(int id, String nombrePropuesta, int costo, double tiempo, int cupo, String tipo) {
 		this.idAtraccion = id;
 		this.nombrePropuesta = nombrePropuesta;
@@ -36,15 +36,15 @@ public abstract class Propuestas {
 		this.tipo = tipo;
 		this.cantAtracciones = cantAtracciones;
 	}
-	
+
 	public Propuestas(String nombrePropuesta) {
 		this.nombrePropuesta = nombrePropuesta;
 	}
 
 	public Propuestas() {
-		
+
 	}
-	
+
 	public int getIdAtraccion() {
 		return this.idAtraccion;
 	}
@@ -91,12 +91,13 @@ public abstract class Propuestas {
 		if (this.cupo > 0) {
 			this.cupo = getCupo();
 			this.cupo--;
-			System.out.println("El cupo disponible para esta atracci�n es de " + cupo + "\n ------------------------");
+			System.out
+					.println("El cupo disponible para esta atracci�n es de " + cupo + "\n ------------------------");
 		}
 		return this.cupo;
 
 	}
-	
+
 	public boolean getEsPromo() {
 		return this.esPromo;
 	}

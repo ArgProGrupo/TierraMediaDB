@@ -11,20 +11,15 @@ import model.Atraccion;
 import model.Propuestas;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
-		
-		private Atraccion toAtraccion(ResultSet result) {
-			try {
-				return new Atraccion(
-						result.getInt(1),
-						result.getString(2), 
-						result.getInt(3),
-						result.getDouble(4),
-						result.getInt(5),
-						result.getString(6));
-			} catch (Exception e) {
-				throw new MissingDataException(e);
-			}
+
+	private Atraccion toAtraccion(ResultSet result) {
+		try {
+			return new Atraccion(result.getInt(1), result.getString(2), result.getInt(3), result.getDouble(4),
+					result.getInt(5), result.getString(6));
+		} catch (Exception e) {
+			throw new MissingDataException(e);
 		}
+	}
 
 	public List<Propuestas> findAll() {
 		try {
@@ -70,7 +65,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setDouble(3, t.getTiempo());
 			statement.setInt(4, t.getCupo());
 			statement.setString(5, t.getTipo());
-			
+
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {
@@ -221,10 +216,4 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new MissingDataException(e);
 		}
 	}
-
-	public List<Propuestas> findAll(List<Propuestas> a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

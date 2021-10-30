@@ -35,7 +35,7 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	public List<DescuentoAbsoluto> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_ABSOLUTA";
@@ -65,32 +65,32 @@ public class DescuentoAbsolutoDAOImpl implements DescuentoAbsolutoDAO {
 			ResultSet results = statement.executeQuery();
 
 			while (results.next()) {
-			
-			String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n"
-					+ "FROM pack_atracciones pa, promocion p \r\n"
-					+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
-			Connection conn2 = ConnectionProvider.getConnection();
-			PreparedStatement statement2 = conn2.prepareStatement(query2);
-			statement2.setInt(1,2);
-			ResultSet results2 = statement2.executeQuery();
-			while (results2.next()) {
-				for (Propuestas atrac : a) {
-					if (atrac.getIdAtraccion() == results2.getInt(1))
-						promoAtracciones.add(atrac);
+
+				String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n" + "FROM pack_atracciones pa, promocion p \r\n"
+						+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+				Connection conn2 = ConnectionProvider.getConnection();
+				PreparedStatement statement2 = conn2.prepareStatement(query2);
+				statement2.setInt(1, 2);
+				ResultSet results2 = statement2.executeQuery();
+				while (results2.next()) {
+					for (Propuestas atrac : a) {
+						if (atrac.getIdAtraccion() == results2.getInt(1))
+							promoAtracciones.add(atrac);
+					}
 				}
-			}
-			desc = toDescuentoAbsoluto(results);
-			desc.setLista(promoAtracciones);;
-			promoAbs.add(desc);
-			
+				desc = toDescuentoAbsoluto(results);
+				desc.setLista(promoAtracciones);
+				;
+				promoAbs.add(desc);
+
 			}
 			return promoAbs;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
 
-		public int countAll() {
+	public int countAll() {
 		try {
 			String query = "SELECT COUNT(1) AS TOTAL FROM PROMOCION_ABSOLUTA";
 			Connection conn = ConnectionProvider.getConnection();

@@ -37,7 +37,7 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	public List<Propuestas> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
@@ -58,39 +58,39 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 	public List<Propuestas> findAll(List<Propuestas> a) {
 		try {
 			List<Propuestas> promoPor = new LinkedList<Propuestas>();
-		ArrayList<Propuestas> promoAtracciones = new ArrayList<Propuestas>();
-		DescuentoPorcentaje desc;
+			ArrayList<Propuestas> promoAtracciones = new ArrayList<Propuestas>();
+			DescuentoPorcentaje desc;
 
-		String query = "SELECT * FROM PROMOCION_PORCENTUAL";
-		Connection conn = ConnectionProvider.getConnection();
-		PreparedStatement statement = conn.prepareStatement(query);
-		ResultSet results = statement.executeQuery();
+			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
 
-		while (results.next()) {
-		
-		String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n"
-				+ "FROM pack_atracciones pa, promocion p \r\n"
-				+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
-		Connection conn2 = ConnectionProvider.getConnection();
-		PreparedStatement statement2 = conn2.prepareStatement(query2);
-		statement2.setInt(1,3);
-		ResultSet results2 = statement2.executeQuery();
-		while (results2.next()) {
-			for (Propuestas atrac : a) {
-				if (atrac.getIdAtraccion() == results2.getInt(1))
-					promoAtracciones.add(atrac);
+			while (results.next()) {
+
+				String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n" + "FROM pack_atracciones pa, promocion p \r\n"
+						+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+				Connection conn2 = ConnectionProvider.getConnection();
+				PreparedStatement statement2 = conn2.prepareStatement(query2);
+				statement2.setInt(1, 3);
+				ResultSet results2 = statement2.executeQuery();
+				while (results2.next()) {
+					for (Propuestas atrac : a) {
+						if (atrac.getIdAtraccion() == results2.getInt(1))
+							promoAtracciones.add(atrac);
+					}
+				}
+				desc = toDescuentoPorcentaje(results);
+				desc.setLista(promoAtracciones);
+				;
+				promoPor.add(desc);
+
 			}
+			return promoPor;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
 		}
-		desc = toDescuentoPorcentaje(results);
-		desc.setLista(promoAtracciones);;
-		promoPor.add(desc);
-		
-		}
-		return promoPor;
-	}catch (Exception e) {
-		throw new MissingDataException(e);
 	}
-}
 
 	public int countAll() {
 		try {

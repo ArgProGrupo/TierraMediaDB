@@ -3,12 +3,12 @@ package model;
 import java.util.*;
 
 public class Promocion extends Propuestas {
-	
+
 	protected int idPromocion;
 	protected int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
 	protected int descuento;
-	
+
 	public Promocion(int idPromocion, String nombrePropuesta, String tipo, int cantAtracciones) {
 		super(nombrePropuesta, tipo, cantAtracciones);
 		this.idPromocion = idPromocion;
@@ -20,22 +20,23 @@ public class Promocion extends Propuestas {
 //		this.promo = (ArrayList<Propuestas>) promo;
 		this.promo = new ArrayList<Propuestas>();
 	}
-		
-	public Promocion (String nombrePropuesta, int descuento) {
+
+	public Promocion(String nombrePropuesta, int descuento) {
 		super(nombrePropuesta);
 		this.descuento = descuento;
 		this.promo = new ArrayList<Propuestas>();
 	}
-	public Promocion (String nombrePropuesta) {
+
+	public Promocion(String nombrePropuesta) {
 		super(nombrePropuesta);
 		this.promo = new ArrayList<Propuestas>();
 	}
-	
+
 	public Promocion(int idPromocion) {
 		super();
 		this.idPromocion = idPromocion;
 	}
-	
+
 	public int getIdPromocion() {
 		return this.idPromocion;
 	}
@@ -92,12 +93,12 @@ public class Promocion extends Propuestas {
 
 	@Override
 	public String toString() {
-		return "Id: " + idPromocion + " | Nombre promo: " + nombrePropuesta +
-			   " | tipo " + tipo + " | Cantidad de atracciones: " + cantAtracciones + "\n";
+		return "Id: " + idPromocion + " | Nombre promo: " + nombrePropuesta + " | tipo " + tipo
+				+ " | Cantidad de atracciones: " + cantAtracciones + "\n";
 	}
-	
-	public ArrayList<Propuestas> getPromoList(){
+
+	public ArrayList<Propuestas> getPromoList() {
 		return promo;
-		
+
 	}
 }

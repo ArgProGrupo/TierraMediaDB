@@ -28,30 +28,24 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 			paxb.setCupo(results2.getInt(5));
 			paxb.setTipo(results2.getString(7));
 			paxb.setCantAtracciones(results2.getInt(8));
-			
-			String query = "SELECT a.* \r\n"
-					+ "FROM atraccion a, promocion_AxB paxb \r\n"
+
+			String query = "SELECT a.* \r\n" + "FROM atraccion a, promocion_AxB paxb \r\n"
 					+ "WHERE a.id_atraccion == paxb.id_atraccion_gratis \r\n";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet results = statement.executeQuery();
-			Atraccion atraccionGratis = new Atraccion(
-					results.getInt(1), 
-					results.getString(2), 
-					results.getInt(3), 
-					results.getDouble(4),
-					results.getInt(5), 
-					results.getString(6));
+			Atraccion atraccionGratis = new Atraccion(results.getInt(1), results.getString(2), results.getInt(3),
+					results.getDouble(4), results.getInt(5), results.getString(6));
 			paxb.setAtraccionGratis(atraccionGratis);
-			
+
 			paxb.setCosto(results2.getInt(3));
-			
+
 			return paxb;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	public List<DescuentoTresPorDos> findAll() {
 		try {
 			String query = "SELECT * FROM PROMOCION_AXB";
@@ -67,7 +61,7 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-	}	
+	}
 
 	public List<Propuestas> findAll(List<Propuestas> a) {
 		try {
@@ -81,32 +75,31 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 			ResultSet results = statement.executeQuery();
 
 			while (results.next()) {
-			
-			String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n"
-					+ "FROM pack_atracciones pa, promocion p \r\n"
-					+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
-			Connection conn2 = ConnectionProvider.getConnection();
-			PreparedStatement statement2 = conn2.prepareStatement(query2);
-			statement2.setInt(1,1);
-			ResultSet results2 = statement2.executeQuery();
-			while (results2.next()) {
-				for (Propuestas atrac : a) {
-					if (atrac.getIdAtraccion() == results2.getInt(1))
-						promoAtracciones.add(atrac);
+
+				String query2 = "SELECT pa.id_atraccion, p.id_promo \r\n" + "FROM pack_atracciones pa, promocion p \r\n"
+						+ "WHERE p.id_promo == pa.id_promocion AND p.id_promo == ? \r\n";
+				Connection conn2 = ConnectionProvider.getConnection();
+				PreparedStatement statement2 = conn2.prepareStatement(query2);
+				statement2.setInt(1, 1);
+				ResultSet results2 = statement2.executeQuery();
+				while (results2.next()) {
+					for (Propuestas atrac : a) {
+						if (atrac.getIdAtraccion() == results2.getInt(1))
+							promoAtracciones.add(atrac);
+					}
 				}
-			}
-			desc = toDescuentoTresPorDos(results);
-			desc.setLista(promoAtracciones);
-			for (Propuestas atrac2 : promoAtracciones) {
-				if(atrac2.getCupo() <= desc.getCupo()) {
-					desc.setCupo(atrac2.getCupo());
+				desc = toDescuentoTresPorDos(results);
+				desc.setLista(promoAtracciones);
+				for (Propuestas atrac2 : promoAtracciones) {
+					if (atrac2.getCupo() <= desc.getCupo()) {
+						desc.setCupo(atrac2.getCupo());
+					}
 				}
-			}
-			promoAxB.add(desc);
-			
+				promoAxB.add(desc);
+
 			}
 			return promoAxB;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}

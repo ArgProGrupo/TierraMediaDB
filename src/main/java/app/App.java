@@ -14,7 +14,7 @@ public class App {
 	private static List<Propuestas> propuestas;
 
 	public static void main(String[] args) throws SQLException {
-				
+
 		UsuarioDAO usuarioDAO = FactoryDAO.getUsuarioDAO();
 		DescuentoTresPorDosDAO DescuentoTresPorDosDAO = FactoryDAO.getDescuentoTresPorDosDAO();
 		List<Propuestas> descAxB = new ArrayList<Propuestas>();
@@ -37,7 +37,6 @@ public class App {
 		propuestas.addAll(descAxB);
 		List<Usuario> usuarios = new LinkedList<Usuario>();
 
-//		System.out.println(propuestas);
 		usuarios = usuarioDAO.findAll();
 
 		Scanner scanner = new Scanner(System.in);
@@ -55,8 +54,8 @@ public class App {
 					break;
 				else if (u.puedeComprar(a)) {
 					System.out.println(a);
-					System.out
-							.println("Si quer�s comprar esta propuesta marc� 1, " + "sino marc� cualquier otro n�mero");
+					System.out.println(
+							"Si quer�s comprar esta propuesta marc� 1, " + "sino marc� cualquier otro n�mero");
 					int acepta = scanner.nextInt();
 					if (acepta == 1) {
 						System.out.println("Compraste " + a + "\n");
@@ -67,7 +66,8 @@ public class App {
 			}
 			usuarioDAO.saveItinerario(u);
 			System.out.println("Gracias " + u.getNombre() + " por elegir y confiar en TierraMediaExpeditions.\n"
-					+ "A continuaci�n podr� observar su itinerario: \n" + "\nIntinerario de " + u.getNombre() + "\n");
+					+ "A continuaci�n podr� observar su itinerario: \n" + "\nIntinerario de " + u.getNombre()
+					+ "\n");
 			System.out.println(u.getItinerarioString());
 			System.out.println("###########################\n");
 		}
