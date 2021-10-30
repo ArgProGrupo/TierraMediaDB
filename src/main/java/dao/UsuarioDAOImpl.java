@@ -40,8 +40,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public List<Propuestas> saveItinerario(Usuario u) throws SQLException {
-		Connection conn = ConnectionProvider.getConnection();
+	/*public List<Propuestas> saveItinerario(Usuario u) throws SQLException {
+		Connection conn;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
@@ -77,7 +77,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			conn.commit();
 		}
 		return u.itinerarioUsuario;
-	}
+	}*/
 
 	public int countAll() {
 		try {
@@ -275,7 +275,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				}
 			}*/
 	
-	public List<Propuestas> saveItinerario(Usuario u) {
+	public List<Propuestas> saveItinerario(Usuario u) throws SQLException {
 		Connection conn;
 		try {
 			conn = ConnectionProvider.getConnection();
