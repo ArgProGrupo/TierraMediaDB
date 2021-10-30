@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
-import model.Atraccion;
 import model.Propuestas;
 import model.Usuario;
 
@@ -57,7 +56,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			for (Propuestas comprada : u.itinerarioUsuario) {
 
-//			INSERT ITINERARIO
 				if (comprada.getEsPromo() == false) {
 					String query2 = "INSERT INTO ITINERARIO (ID_USUARIO, ID_ATRACCION, ID_PROMOCION) VALUES (?, ?, ?)";
 					PreparedStatement statement2 = conn.prepareStatement(query2);
@@ -89,7 +87,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 					}
 				}
 			}
-//			UPDATE ATRACCION
 
 		} catch (SQLException e) {
 			conn.rollback();
@@ -258,13 +255,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public int deleteById(int t) {
+	public int delete(Usuario t) {
 		try {
 			String query = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 
-			statement.setInt(1, t);
+			statement.setInt(1, t.getIdUsuario());
 
 			int rows = statement.executeUpdate();
 			return rows;
@@ -273,9 +270,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public int delete(Usuario t) {
+	@Override
+	public List<Propuestas> findAll(List<Propuestas> a) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 }

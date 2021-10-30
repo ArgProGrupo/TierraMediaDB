@@ -9,7 +9,6 @@ import java.util.List;
 
 import jdbc.ConnectionProvider;
 import model.Atraccion;
-import model.DescuentoAbsoluto;
 import model.DescuentoTresPorDos;
 import model.Propuestas;
 
@@ -53,6 +52,22 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 		}
 	}
 	
+	public List<DescuentoTresPorDos> findAll() {
+		try {
+			String query = "SELECT * FROM PROMOCION_AXB";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
+
+			List<DescuentoTresPorDos> promoAxB = new LinkedList<DescuentoTresPorDos>();
+			while (results.next()) {
+				promoAxB.add(toDescuentoTresPorDos(results));
+			}
+			return promoAxB;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}	
 
 	public List<Propuestas> findAll(List<Propuestas> a) {
 		try {
@@ -92,23 +107,6 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 			}
 			return promoAxB;
 		}catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
-
-	public List<DescuentoTresPorDos> findAll() {
-		try {
-			String query = "SELECT * FROM PROMOCION_AXB";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(query);
-			ResultSet results = statement.executeQuery();
-
-			List<DescuentoTresPorDos> promoAxB = new LinkedList<DescuentoTresPorDos>();
-			while (results.next()) {
-				promoAxB.add(toDescuentoTresPorDos(results));
-			}
-			return promoAxB;
-		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
@@ -231,10 +229,4 @@ public class DescuentoTresPorDosDAOImpl implements DescuentoTresPorDosDAO {
 			throw new MissingDataException(e);
 		}
 	}
-
-	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

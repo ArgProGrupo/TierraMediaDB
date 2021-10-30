@@ -27,7 +27,7 @@ public class DescuentoPorcentajeDAOTest {
 	}
 
 	@Test
-	public void findAllTest() { // REVISTAR! EL ID DA 0 Y TENDRIA QUE DAR 1
+	public void findAllTest() {
 		assertEquals(0, promociones.get(0).getIdAtraccion());
 		assertEquals("Pack aventura", promociones.get(0).getNombre());
 		assertEquals(4, promociones.get(0).getCupo());

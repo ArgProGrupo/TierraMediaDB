@@ -73,9 +73,4 @@ public class AtraccionDAOTest {
 		assertEquals(atracciones.size(), aDAO.countAll());
 	}
 	
-	@Test
-	public void findByIdAtraccionTest() {
-		//'findByIdAtraccion' DEBERÍA DEVOLVER UNA PROMOCION? A ALGUIEN LE IMPORTA?
-	}
-	
 }

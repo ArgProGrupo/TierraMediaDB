@@ -14,6 +14,6 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
 	public abstract List<Usuario> findByTipoFavorito(String atraccionFavorita);
 	public abstract List<Usuario> findByPresupuesto(int presupuesto);
 	public abstract List<Usuario> findByTiempoDisponible(double tiempoDisponible);
-	public abstract int deleteById(int idUsuario);
+	public abstract int delete(Usuario t);
 	public ArrayList<Propuestas> saveItinerario(Usuario u) throws SQLException;
 }

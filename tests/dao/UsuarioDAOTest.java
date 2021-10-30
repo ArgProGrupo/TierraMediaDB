@@ -15,13 +15,13 @@ public class UsuarioDAOTest {
 	List<Usuario> usuarios;
 	
 	@Before
-	public void setup() { // EN EL FACTORY, TODOS SE LLAMAN CON 'DAO' AL FINAL MENOS DescuentoTresPorDosDAO
+	public void setup() {
 		uDAO = FactoryDAO.getUsuarioDAO();
 		usuarios = uDAO.findAll();
 	}
 
 	@Test
-	public void findAllTest() { // EL PRESUPUESTO ES DOUBLE
+	public void findAllTest() {
 		assertEquals(1, usuarios.get(0).getIdUsuario());
 		assertEquals(2, usuarios.get(1).getIdUsuario());
 		assertEquals(3, usuarios.get(2).getIdUsuario());
