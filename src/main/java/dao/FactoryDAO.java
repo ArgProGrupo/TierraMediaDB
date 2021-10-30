@@ -10,10 +10,6 @@ public class FactoryDAO {
 		return new AtraccionDAOImpl();
 	}
 
-	public static PromocionDAO getPromocionDAO() {
-		return new PromocionDAOImpl();
-	}
-
 	public static DescuentoPorcentajeDAO getDescuentoPorcentajeDAO() {
 		return new DescuentoPorcentajeDAOImpl();
 	}
