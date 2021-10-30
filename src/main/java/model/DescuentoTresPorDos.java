@@ -29,6 +29,7 @@ public class DescuentoTresPorDos extends Promocion {
 	public DescuentoTresPorDos(String nombrePropuesta,  int idAtraccionGratis) {
 		super(nombrePropuesta);
 		this.idAtraccionGratis = idAtraccionGratis;
+		this.esPromo = true;
 	}
 
 	public Propuestas getAtraccionGratis() {
@@ -79,26 +80,10 @@ public class DescuentoTresPorDos extends Promocion {
 		return super.calcularTiempo();
 	}
 
-	public int getCosto() {
-		return this.costo;
-	}
-
-	public double getTiempo() {
-		return this.tiempo;
-	}
-
-	public int getCupo() {
-		return this.cupo;
-	}
-
-	public String getTipo() {
-		return this.tipo;
-	}
-
 	@Override
 	public String toString() {
 		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() +
-				"; Tiempo: " + getTiempo() + "; Cupo: " + getCupo() + 
+				"; Tiempo: " + getTiempo() + "; Cupo: " + calcularCupo() + 
 				"; Cantidad de atracciones: " +	promo.size() + 
 				"; Atraccion de regalo: " + atraccionGratis.getNombre() + "\n";
 	}
@@ -126,5 +111,8 @@ public class DescuentoTresPorDos extends Promocion {
 
 	public Propuestas setAtraccionGratis(Atraccion atraccionGratis) {
 		return this.atraccionGratis = atraccionGratis;
+	}
+	public int setIdPromo(int id) {
+		return this.idPromocion = id;
 	}
 }

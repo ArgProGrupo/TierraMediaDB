@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,8 +41,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	/*public List<Propuestas> saveItinerario(Usuario u) throws SQLException {
-		Connection conn;
+
+	public ArrayList<Propuestas> saveItinerario(Usuario u) throws SQLException {
+		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
@@ -54,30 +56,46 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.executeUpdate();
 
 			for (Propuestas comprada : u.itinerarioUsuario) {
-				String query2 = "INSERT INTO ITINERARIO (ID_USUARIO, ID_ATRACCION, ID_PROMOCION) VALUES (?, ?, ?)";
-				Connection conn2 = ConnectionProvider.getConnection();
-				PreparedStatement statement2 = conn2.prepareStatement(query2);
-				statement2.setInt(1, u.getIdUsuario());
-				statement2.setInt(2, comprada.getIdAtraccion());
-				statement2.setInt(3, comprada.getIdPromocion());
-				statement2.executeUpdate();
 
-//			INSERT ITINERARIO
-				String query3 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
-				Connection conn3 = ConnectionProvider.getConnection();
-				PreparedStatement statement3 = conn3.prepareStatement(query3);
-				statement3.setInt(1, comprada.getCupo());
-				statement3.setInt(2, comprada.getIdAtraccion());
-				statement3.executeUpdate();
-//			UPDATE ATRACCION
+				if (comprada.getEsPromo() == false) {
+					String query2 = "INSERT INTO ITINERARIO (ID_USUARIO, ID_ATRACCION, ID_PROMOCION) VALUES (?, ?, ?)";
+					PreparedStatement statement2 = conn.prepareStatement(query2);
+					statement2.setInt(1, u.getIdUsuario());
+					statement2.setInt(2, comprada.getIdAtraccion());
+					statement2.setInt(3, comprada.getIdPromocion());
+					statement2.executeUpdate();
+
+					String query3 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
+					PreparedStatement statement3 = conn.prepareStatement(query3);
+					statement3.setInt(1, comprada.getCupo());
+					statement3.setInt(2, comprada.getIdAtraccion());
+					statement3.executeUpdate();
+				}
+				if (comprada.getEsPromo()) {
+					for (Propuestas a : comprada.getPromoList()) {
+						String query5 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
+						PreparedStatement statement5 = conn.prepareStatement(query5);
+						statement5.setInt(1, a.getCupo());
+						statement5.setInt(2, a.getIdAtraccion());
+						statement5.executeUpdate();
+
+						String query2 = "INSERT INTO ITINERARIO (ID_USUARIO, ID_ATRACCION, ID_PROMOCION) VALUES (?, ?, ?)";
+						PreparedStatement statement2 = conn.prepareStatement(query2);
+						statement2.setInt(1, u.getIdUsuario());
+						statement2.setInt(2, a.getIdAtraccion());
+						statement2.setInt(3, comprada.getIdPromocion());
+						statement2.executeUpdate();
+					}
+				}
 			}
+
 		} catch (SQLException e) {
 			conn.rollback();
 		} finally {
 			conn.commit();
 		}
 		return u.itinerarioUsuario;
-	}*/
+	}
 
 	public int countAll() {
 		try {
@@ -238,13 +256,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public int deleteById(int t) {
+	public int delete(Usuario t) {
 		try {
 			String query = "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(query);
 
-			statement.setInt(1, t);
+			statement.setInt(1, t.getIdUsuario());
 
 			int rows = statement.executeUpdate();
 			return rows;
@@ -253,63 +271,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	public int delete(Usuario t) {
+	public List<Propuestas> findAll(List<Propuestas> a) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	/*public List<Propuestas> saveItinerario(Usuario u) {
-		Connection conn;
-		try {
-			conn = ConnectionProvider.getConnection();
-			conn.setAutoCommit(false);
-		UPDATE USUARIO
-		for (atraccion comprada) {
-			INSERT ITINERARIO
-			UPDATE ATRACCION
-			}
-		} catch (SQLException e) { 
-			conn.rollback();
-			} finnaly {
-				conn.commit();
-				}
-			}*/
-	
-	public List<Propuestas> saveItinerario(Usuario u) throws SQLException {
-		Connection conn;
-		try {
-			conn = ConnectionProvider.getConnection();
-			conn.setAutoCommit(false);
-
-			String query = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPO_DISPONIBLE = ? WHERE ID_USUARIO = ?";
-			PreparedStatement statement = conn.prepareStatement(query);
-			statement.setDouble(1, u.getPresupuesto());
-			statement.setDouble(2, u.getTiempo());
-			statement.setInt(3, u.getIdUsuario());
-			statement.executeUpdate();
-
-			for (Propuestas comprada : u.itinerarioUsuario) {
-				String query2 = "INSERT INTO ITINERARIO (ID_USUARIO, ID_ATRACCION, ID_PROMOCION) VALUES (?, ?, ?)";
-				PreparedStatement statement2 = conn.prepareStatement(query2);
-				statement2.setInt(1, u.getIdUsuario());
-				statement2.setInt(2, comprada.getIdAtraccion());
-				statement2.setInt(3, comprada.getIdPromocion());
-				statement2.executeUpdate();
-
-//			INSERT ITINERARIO
-				String query3 = "UPDATE ATRACCION SET CUPO = ? WHERE ID_ATRACCION = ?";
-				PreparedStatement statement3 = conn.prepareStatement(query3);
-				statement3.setInt(1, comprada.getCupo());
-				statement3.setInt(2, comprada.getIdAtraccion());
-				statement3.executeUpdate();
-//			UPDATE ATRACCION
-			}
-		} catch (Exception e) {
-			conn.rollback();
-		} finally {
-			conn.commit();
-		}
-		return u.itinerarioUsuario;
+		return null;
 	}
 
 }

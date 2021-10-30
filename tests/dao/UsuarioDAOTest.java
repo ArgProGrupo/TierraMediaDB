@@ -18,53 +18,38 @@ public class UsuarioDAOTest {
 	List<Usuario> usuarios;
 	
 	@Before
-	public void setup() { // EN EL FACTORY, TODOS SE LLAMAN CON 'DAO' AL FINAL MENOS DescuentoTresPorDosDAO
+	public void setup() {
 		usuarioDAO = FactoryDAO.getUsuarioDAO();
 	}
 
 	@Test
-	public void findAllTest() { // EL PRESUPUESTO ES DOUBLE
+	public void findAllTest() {
 		usuarios = usuarioDAO.findAll();
-		
+
 		assertEquals(1, usuarios.get(0).getIdUsuario());
 		assertEquals(2, usuarios.get(1).getIdUsuario());
 		assertEquals(3, usuarios.get(2).getIdUsuario());
 		assertEquals(4, usuarios.get(3).getIdUsuario());
-		assertEquals(5, usuarios.get(4).getIdUsuario());
-		assertEquals(7, usuarios.get(5).getIdUsuario());
-		assertEquals(9, usuarios.get(6).getIdUsuario());
 		
 		assertEquals(10, usuarios.get(0).getPresupuesto(), 0);
 		assertEquals(100, usuarios.get(1).getPresupuesto(), 0);
 		assertEquals(36, usuarios.get(2).getPresupuesto(), 0);
 		assertEquals(120, usuarios.get(3).getPresupuesto(), 0);
-		assertEquals(100, usuarios.get(4).getPresupuesto(), 0);
-		assertEquals(100, usuarios.get(5).getPresupuesto(), 0);
-		assertEquals(150, usuarios.get(6).getPresupuesto(), 0);
-		
+
 		assertEquals(8, usuarios.get(0).getTiempo(), 0);
 		assertEquals(5, usuarios.get(1).getTiempo(), 0);
 		assertEquals(8, usuarios.get(2).getTiempo(), 0);
 		assertEquals(6, usuarios.get(3).getTiempo(), 0);
-		assertEquals(1, usuarios.get(4).getTiempo(), 0);
-		assertEquals(1, usuarios.get(5).getTiempo(), 0);
-		assertEquals(3, usuarios.get(6).getTiempo(), 0);
 		
 		assertEquals("Eowyn", usuarios.get(0).getNombre());
 		assertEquals("Gandalf", usuarios.get(1).getNombre());
 		assertEquals("Sam", usuarios.get(2).getNombre());
 		assertEquals("Galadriel", usuarios.get(3).getNombre());
-		assertEquals("Facu", usuarios.get(4).getNombre());
-		assertEquals("Calel", usuarios.get(5).getNombre());
-		assertEquals("Facu", usuarios.get(6).getNombre());
 		
 		assertEquals("AVENTURA", usuarios.get(0).getTipoAtraccionFavorita());
 		assertEquals("PAISAJE", usuarios.get(1).getTipoAtraccionFavorita());
 		assertEquals("DEGUSTACION", usuarios.get(2).getTipoAtraccionFavorita());
 		assertEquals("PAISAJE", usuarios.get(3).getTipoAtraccionFavorita());
-		assertEquals("AVENTURA", usuarios.get(4).getTipoAtraccionFavorita());
-		assertEquals(null, usuarios.get(5).getTipoAtraccionFavorita());
-		assertEquals("DEGUSTACION", usuarios.get(6).getTipoAtraccionFavorita());
 	}
 	
 	@Test
@@ -94,7 +79,7 @@ public class UsuarioDAOTest {
 		assertEquals(1, usuarios.get(0).getTiempo(), 0);
 		assertEquals("AVENTURA", usuarios.get(0).getTipoAtraccionFavorita());
 		
-		assertEquals(9, usuarios.get(1).getIdUsuario());
+		assertEquals(7, usuarios.get(1).getIdUsuario());
 		assertEquals("Facu", usuarios.get(1).getNombre());
 		assertEquals(150, usuarios.get(1).getPresupuesto(), 0);
 		assertEquals(3, usuarios.get(1).getTiempo(), 0);
@@ -118,10 +103,10 @@ public class UsuarioDAOTest {
 		assertEquals(6, usuarios.get(1).getTiempo(), 0);
 		assertEquals("PAISAJE", usuarios.get(1).getTipoAtraccionFavorita());
 		
-		assertEquals(19, usuarios.get(2).getIdUsuario());
-		assertEquals("Alvaro", usuarios.get(2).getNombre());
-		assertEquals(300, usuarios.get(2).getPresupuesto(), 0);
-		assertEquals(8, usuarios.get(2).getTiempo(), 0);
+		assertEquals(6, usuarios.get(2).getIdUsuario());
+		assertEquals("Calel", usuarios.get(2).getNombre());
+		assertEquals(120, usuarios.get(2).getPresupuesto(), 0);
+		assertEquals(1, usuarios.get(2).getTiempo(), 0);
 		assertEquals("PAISAJE", usuarios.get(2).getTipoAtraccionFavorita());
 		
 	}
@@ -152,33 +137,41 @@ public class UsuarioDAOTest {
 		assertEquals(120, usuarios.get(0).getPresupuesto(), 0);
 		assertEquals(6, usuarios.get(0).getTiempo(), 0);
 		assertEquals("PAISAJE", usuarios.get(0).getTipoAtraccionFavorita());
+		
+		assertEquals(6, usuarios.get(1).getIdUsuario());
+		assertEquals("Calel", usuarios.get(1).getNombre());
+		assertEquals(120, usuarios.get(1).getPresupuesto(), 0);
+		assertEquals(1, usuarios.get(1).getTiempo(), 0);
+		assertEquals("PAISAJE", usuarios.get(1).getTipoAtraccionFavorita());
 	}
 	
 	@Test
 	public void registraNuevoUsuario() {
-		u1 = new Usuario("Alvaro", "PAISAJE", 300, 8.0);
+		u1 = new Usuario("Sofi", "AVENTURA", 310, 7.0);
 		usuarioDAO.insert(u1);
-		//assertEquals(18, u1.getIdUsuario());
-		assertEquals("Alvaro", u1.getNombre());
-		assertEquals("PAISAJE", u1.getTipoAtraccionFavorita());
-		assertEquals(300, u1.getPresupuesto(), 0);
-		assertEquals(8, u1.getTiempo(), 0);
+		assertEquals("Sofi", u1.getNombre());
+		assertEquals("AVENTURA", u1.getTipoAtraccionFavorita());
+		assertEquals(310, u1.getPresupuesto(), 0);
+		assertEquals(7, u1.getTiempo(), 0);
+		
+		u2 = new Usuario("Alvaro", "PAISAJE", 300, 8.0);
+		usuarioDAO.insert(u2);
+		assertEquals("Alvaro", u2.getNombre());
+		assertEquals("PAISAJE", u2.getTipoAtraccionFavorita());
+		assertEquals(300, u2.getPresupuesto(), 0);
+		assertEquals(8, u2.getTiempo(), 0);
 	}
 	
-	/*@Test
-	public void deleteaUsuarioPorId() {
-		usuarioDAO.deleteById(18);
-		assertNull(u1);
-		
-	}*/
-	
 	@Test
-	public void seteaDatos() {
+	public void deleteaUsuarioPorId() {
+		u1 = new Usuario(7);
+		usuarioDAO.delete(u1);
+		assertEquals(7, u1.getIdUsuario());
+		assertNull(u1.getNombre());
+		assertNull(u1.getTipoAtraccionFavorita());
+		assertEquals(0, u1.getPresupuesto(), 0);
+		assertEquals(0, u1.getTiempo(), 0);
 		
-		//  ¿¿¿¿¿?????
-		
-		//u1 = new Usuario(20);
-		//usuarioDAO.update();
 	}
 
 }

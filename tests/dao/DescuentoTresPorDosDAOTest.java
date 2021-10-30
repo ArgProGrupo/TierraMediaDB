@@ -18,21 +18,20 @@ public class DescuentoTresPorDosDAOTest {
 	List<Propuestas> promociones;
 	
 	@Before
-	public void setup() { // EN EL FACTORY, TODOS SE LLAMAN CON 'DAO' AL FINAL MENOS DescuentoTresPorDosDAO
+	public void setup() {
 		aDAO = FactoryDAO.getAtraccionDAO();
 		atracciones = aDAO.findAll();
 		
-		dtpdDAO = FactoryDAO.getDescuentoTresPorDos();
+		dtpdDAO = FactoryDAO.getDescuentoTresPorDosDAO();
 		promociones = dtpdDAO.findAll(atracciones);
 	}
 
 	@Test
-	public void findAllTest() { // REVISTAR! EL ID DA 0 Y TENDRIA QUE DAR 1
-								// EL COSTO DEBERÍA DAR 10, NO ME ACUERDO DONDE CALCULABA ESO
+	public void findAllTest() {
 		assertEquals(0, promociones.get(0).getIdAtraccion());
 		assertEquals("Pack paisajes", promociones.get(0).getNombre());
 		assertEquals(15, promociones.get(0).getCupo());
-		assertEquals(22, promociones.get(0).getCosto());
+		assertEquals(10, promociones.get(0).getCosto());
 		assertEquals(7.5, promociones.get(0).getTiempo(), 0);
 		assertEquals("PAISAJE", promociones.get(0).getTipo());
 		

@@ -9,9 +9,9 @@ import java.util.List;
 import jdbc.ConnectionProvider;
 import model.Atraccion;
 import model.Promocion;
+import model.Propuestas;
 
 public class PromocionDAOImpl implements PromocionDAO{
-	// CAPAZ QUE NO SIRVE
 	
 	private Promocion toPromocion(ResultSet result) {
 		try {
@@ -41,6 +41,11 @@ public class PromocionDAOImpl implements PromocionDAO{
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+	
+	public List<Propuestas> findAll(List<Propuestas> a) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public int countAll() {

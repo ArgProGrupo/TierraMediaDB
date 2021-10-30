@@ -8,10 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
-import model.Atraccion;
 import model.DescuentoAbsoluto;
 import model.DescuentoPorcentaje;
-import model.DescuentoTresPorDos;
 import model.Promocion;
 import model.Propuestas;
 
@@ -20,20 +18,38 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 	private DescuentoPorcentaje toDescuentoPorcentaje(ResultSet result) {
 		try {
 			DescuentoPorcentaje dp = new DescuentoPorcentaje(result.getString(2), result.getInt(3));
-			String query2 = "SELECT p.nombre_promo, (sum(a.costo) - (sum(a.costo) * (pr.porcentaje) / 100) ) AS 'costo', sum(a.duracion) AS 'duracion_total' , min(a.cupo) AS 'cupo', pr.porcentaje AS 'porcentaje', a.tipo AS 'tipo', p.cant_atracciones \r\n"
+			String query2 = "SELECT p.id_promo, p.nombre_promo, (sum(a.costo) - (sum(a.costo) * (pr.porcentaje) / 100) ) AS 'costo', sum(a.duracion) AS 'duracion_total' , min(a.cupo) AS 'cupo', pr.porcentaje AS 'porcentaje', a.tipo AS 'tipo', p.cant_atracciones \r\n"
 					+ "FROM promocion p, pack_atracciones pa , atraccion a, promocion_porcentual pr \r\n"
 					+ "WHERE p.id_promo == pa.id_promocion AND a.id_atraccion == pa.id_atraccion AND p.nombre_promo LIKE '%AVENTURA' \r\n";
 			Connection conn2 = ConnectionProvider.getConnection();
 			PreparedStatement statement2 = conn2.prepareStatement(query2);
 			ResultSet results2 = statement2.executeQuery();
-			dp.setCosto(results2.getInt(2));
-			dp.setTiempo(results2.getDouble(3));
-			dp.setCupo(results2.getInt(4));
-			dp.setDescuento(results2.getInt(5));
-			dp.setTipo(results2.getString(6));
-			dp.setCantAtracciones(results2.getInt(7));
+			dp.setIdPromo(results2.getInt(1));
+			dp.setCosto(results2.getInt(3));
+			dp.setTiempo(results2.getDouble(4));
+			dp.setCupo(results2.getInt(5));
+			dp.setDescuento(results2.getInt(6));
+			dp.setTipo(results2.getString(7));
+			dp.setCantAtracciones(results2.getInt(8));
 
 			return dp;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	public List<Propuestas> findAll() {
+		try {
+			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet results = statement.executeQuery();
+
+			List<Propuestas> promoPor = new LinkedList<Propuestas>();
+			while (results.next()) {
+				promoPor.add(toDescuentoPorcentaje(results));
+			}
+			return promoPor;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -190,28 +206,6 @@ public class DescuentoPorcentajeDAOImpl implements DescuentoPorcentajeDAO {
 				promoPorc.add(toDescuentoPorcentaje(results));
 			}
 			return promoPorc;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
-
-	public List<DescuentoAbsoluto> findByDescuento(int descuento) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Propuestas> findAll() {
-		try {
-			String query = "SELECT * FROM PROMOCION_PORCENTUAL";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(query);
-			ResultSet results = statement.executeQuery();
-
-			List<Propuestas> promoPor = new LinkedList<Propuestas>();
-			while (results.next()) {
-				promoPor.add(toDescuentoPorcentaje(results));
-			}
-			return promoPor;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

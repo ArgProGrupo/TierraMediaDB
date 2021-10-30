@@ -26,7 +26,7 @@ public class DescuentoAbsolutoDAOTest {
 	}
 
 	@Test
-	public void findAllTest() { // REVISTAR! EL ID DA 0 Y TENDRIA QUE DAR 1
+	public void findAllTest() {
 		assertEquals(0, promociones.get(0).getIdAtraccion());
 		assertEquals("Pack degustacion", promociones.get(0).getNombre());
 		assertEquals(30, promociones.get(0).getCupo());

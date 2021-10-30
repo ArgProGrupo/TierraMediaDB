@@ -2,7 +2,6 @@ package dao;
 
 import java.util.List;
 
-import model.Atraccion;
 import model.DescuentoPorcentaje;
 import model.Propuestas;
 
