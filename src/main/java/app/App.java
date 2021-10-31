@@ -42,8 +42,8 @@ public class App {
 		Scanner scanner = new Scanner(System.in);
 
 		for (Usuario u : usuarios) {
-			System.out.println("Bienvenido al sistema de autogestiï¿½n de TierraMediaExpeditions!\n"
-					+ "A continuaciï¿½n podrï¿½ observar y elegir entre nuestra extensa lista de atracciones \nquï¿½ propuesta es "
+			System.out.println("Bienvenido al sistema de autogestión de TierraMediaExpeditions!\n"
+					+ "A continuación podrá observar y elegir entre nuestra extensa lista de atracciones \nqué propuesta es "
 					+ "la indicada para usted y se convierta en la mejor experiencia de su vida!");
 			System.out.println("\nPROPUESTAS ORDENADAS POR PREFERENCIA PARA USUARIO:\n");
 			System.out.println(u);
@@ -55,7 +55,7 @@ public class App {
 				else if (u.puedeComprar(a)) {
 					System.out.println(a);
 					System.out.println(
-							"Si querï¿½s comprar esta propuesta marcï¿½ 1, " + "sino marcï¿½ cualquier otro nï¿½mero");
+							"Si quieres comprar esta propuesta marca 1, " + "sino marca cualquier otro número");
 					int acepta = scanner.nextInt();
 					if (acepta == 1) {
 						System.out.println("Compraste " + a + "\n");
@@ -66,7 +66,7 @@ public class App {
 			}
 			usuarioDAO.saveItinerario(u);
 			System.out.println("Gracias " + u.getNombre() + " por elegir y confiar en TierraMediaExpeditions.\n"
-					+ "A continuaciï¿½n podrï¿½ observar su itinerario: \n" + "\nIntinerario de " + u.getNombre()
+					+ "A continuación podrá observar su itinerario: \n" + "\nIntinerario de " + u.getNombre()
 					+ "\n");
 			System.out.println(u.getItinerarioString());
 			System.out.println("###########################\n");

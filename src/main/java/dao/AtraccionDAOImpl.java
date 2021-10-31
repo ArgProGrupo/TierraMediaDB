@@ -215,5 +215,20 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}	
+	
+		public int delete(Atraccion t) {
+			try {
+				String query = "DELETE FROM ATRACCION WHERE ID_ATRACCION = ?";
+				Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement statement = conn.prepareStatement(query);
+
+				statement.setInt(1, t.getIdAtraccion());
+
+				int rows = statement.executeUpdate();
+				return rows;
+			} catch (Exception e) {
+				throw new MissingDataException(e);
+		}
 	}
 }

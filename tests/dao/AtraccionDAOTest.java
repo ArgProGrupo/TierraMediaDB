@@ -10,6 +10,7 @@ import org.junit.Test;
 import model.Atraccion;
 import model.Propuestas;
 
+
 public class AtraccionDAOTest {
 	
 	AtraccionDAO aDAO;
@@ -41,7 +42,7 @@ public class AtraccionDAOTest {
 		assertEquals("La Comarca", atraccionesPropuestas.get(2).getNombre());
 		assertEquals("Mordor", atraccionesPropuestas.get(3).getNombre());
 		assertEquals("Abismo de Helm", atraccionesPropuestas.get(4).getNombre());
-		//assertEquals("LothlÃ³rien", atraccionesPropuestas.get(5).getNombre());
+		assertEquals("Lothlórien", atraccionesPropuestas.get(5).getNombre());
 		assertEquals("Erebor", atraccionesPropuestas.get(6).getNombre());
 		assertEquals("Bosque Negro", atraccionesPropuestas.get(7).getNombre());
 		
@@ -199,16 +200,18 @@ public class AtraccionDAOTest {
 		assertEquals("AVENTURA", a2.getTipo());
 	}
 	
-	public void eliminaAtraccion() {
-		a1 = new Atraccion(10, "Luna de los Lobos", 50, 3, 50, "AVENTURA");
+	@Test
+	public void eliminaAtraccionPorId() {
+		a1 = new Atraccion(9);
 		aDAO.delete(a1);
 		
-		assertEquals(10, a1.getIdAtraccion());
+		assertEquals(9, a1.getIdAtraccion());
 		assertNull(a1.getNombre());
 		assertEquals(0, a1.getCosto());
 		assertEquals(0, a1.getTiempo(), 0.001);
 		assertEquals(0, a1.getCupo());
 		assertNull(a1.getTipo());
+	
 	}
 	
 }

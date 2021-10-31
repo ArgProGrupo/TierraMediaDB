@@ -164,9 +164,9 @@ public class UsuarioDAOTest {
 	
 	@Test
 	public void deleteaUsuarioPorId() {
-		u1 = new Usuario(7);
+		u1 = new Usuario(8);
 		usuarioDAO.delete(u1);
-		assertEquals(7, u1.getIdUsuario());
+		assertEquals(8, u1.getIdUsuario());
 		assertNull(u1.getNombre());
 		assertNull(u1.getTipoAtraccionFavorita());
 		assertEquals(0, u1.getPresupuesto(), 0);
