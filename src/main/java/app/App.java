@@ -16,27 +16,15 @@ public class App {
 	public static void main(String[] args) throws SQLException {
 
 		UsuarioDAO usuarioDAO = FactoryDAO.getUsuarioDAO();
-		DescuentoTresPorDosDAO DescuentoTresPorDosDAO = FactoryDAO.getDescuentoTresPorDosDAO();
-		List<Propuestas> descAxB = new ArrayList<Propuestas>();
-		DescuentoPorcentajeDAO DescuentoPorcentajeDAO = FactoryDAO.getDescuentoPorcentajeDAO();
-		List<Propuestas> descPor = new ArrayList<Propuestas>();
-		DescuentoAbsolutoDAO DescuentoAbsolutoDAO = FactoryDAO.getDescuentoAbsolutoDAO();
-		List<Propuestas> descAb = new ArrayList<Propuestas>();
-
+		PromocionDAO promocionDAO = FactoryDAO.getPromocionDAO();
 		AtraccionDAO atraccionDAO = FactoryDAO.getAtraccionDAO();
-
+		List<Propuestas> desc = new ArrayList<Propuestas>();
 		propuestas = new ArrayList<Propuestas>();
-		propuestas = atraccionDAO.findAll();
-
-		descAxB = DescuentoTresPorDosDAO.findAll(propuestas);
-		descPor = DescuentoPorcentajeDAO.findAll(propuestas);
-		descAb = DescuentoAbsolutoDAO.findAll(propuestas);
-
-		propuestas.addAll(descAb);
-		propuestas.addAll(descPor);
-		propuestas.addAll(descAxB);
 		List<Usuario> usuarios = new LinkedList<Usuario>();
 
+		propuestas = atraccionDAO.findAll();
+		desc = promocionDAO.findAll(propuestas);
+		propuestas.addAll(desc);
 		usuarios = usuarioDAO.findAll();
 
 		Scanner scanner = new Scanner(System.in);
@@ -66,12 +54,10 @@ public class App {
 			}
 			usuarioDAO.saveItinerario(u);
 			System.out.println("Gracias " + u.getNombre() + " por elegir y confiar en TierraMediaExpeditions.\n"
-					+ "A continuación podrá observar su itinerario: \n" + "\nIntinerario de " + u.getNombre()
-					+ "\n");
+					+ "A continuación podrá observar su itinerario: \n" + "\nIntinerario de " + u.getNombre() + "\n");
 			System.out.println(u.getItinerarioString());
 			System.out.println("###########################\n");
 		}
 		scanner.close();
-		
 	}
 }

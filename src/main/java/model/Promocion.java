@@ -8,23 +8,34 @@ public class Promocion extends Propuestas {
 	protected int cantAtracciones;
 	protected ArrayList<Propuestas> promo;
 	protected int descuento;
+	private String tipoPromo;
+	private Propuestas atraccionGratis;
 
-	public Promocion(int idPromocion, String nombrePropuesta, String tipo, int cantAtracciones) {
-		super(nombrePropuesta, tipo, cantAtracciones);
-		this.idPromocion = idPromocion;
-		this.promo = new ArrayList<Propuestas>();
-	}
-
-	public Promocion(String nombrePropuesta, String tipo, int cantAtracciones) {
-		super(nombrePropuesta, tipo, cantAtracciones);
-//		this.promo = (ArrayList<Propuestas>) promo;
-		this.promo = new ArrayList<Propuestas>();
-	}
-
-	public Promocion(String nombrePropuesta, int descuento) {
+//	public Promocion(int idPromocion, String nombrePropuesta, String tipo, int cantAtracciones) {
+//		super(nombrePropuesta, tipo, cantAtracciones);
+//		this.idPromocion = idPromocion;
+//		this.promo = new ArrayList<Propuestas>();
+//	}
+//
+//	public Promocion(String nombrePropuesta, String tipo, int cantAtracciones) {
+//		super(nombrePropuesta, tipo, cantAtracciones);
+////		this.promo = (ArrayList<Propuestas>) promo;
+//		this.promo = new ArrayList<Propuestas>();
+//	}
+//
+//	public Promocion(String nombrePropuesta, int descuento) {
+//		super(nombrePropuesta);
+//		this.descuento = descuento;
+//		this.promo = new ArrayList<Propuestas>();
+//	}
+	public Promocion(int idPromocion, String nombrePropuesta, int descuento, String tipoPromo, String tipo) {
 		super(nombrePropuesta);
+		this.idPromocion = idPromocion;
 		this.descuento = descuento;
+		this.tipoPromo = tipoPromo;
 		this.promo = new ArrayList<Propuestas>();
+		this.tipo = tipo;
+		this.esPromo = true;
 	}
 
 	public Promocion(String nombrePropuesta) {
@@ -43,10 +54,25 @@ public class Promocion extends Propuestas {
 
 	public int calcularCosto() {
 		int costopromo = 0;
+		this.costo = 0;
 		for (Propuestas p : promo) {
 			costopromo += p.getCosto();
 		}
-		return costopromo;
+		if (tipoPromo.equals("abs")) {
+			costopromo -= this.descuento;
+		}
+		if (tipoPromo.equals("porcentaje")) {
+			costopromo -= (costopromo * descuento / 100);
+		}
+		if(tipoPromo.equals("axb")){
+		if (promo.size() > 0)
+			costopromo -= (promo.get((promo.size() - 1)).getCosto());
+		else {
+			costopromo = 0;
+		}
+		}
+		return this.costo = costopromo;
+
 	}
 
 	public double calcularTiempo() {
@@ -59,11 +85,13 @@ public class Promocion extends Propuestas {
 
 	public int calcularCupo() {
 		int cupoMaximo = 100;
+		this.cupo = cupoMaximo;
+		
 		for (Propuestas p : promo) {
 			if (cupoMaximo > p.getCupo())
 				cupoMaximo = p.getCupo();
 		}
-		return cupoMaximo;
+		return this.cupo = cupoMaximo;
 	}
 
 	@Override
@@ -93,12 +121,38 @@ public class Promocion extends Propuestas {
 
 	@Override
 	public String toString() {
-		return "Id: " + idPromocion + " | Nombre promo: " + nombrePropuesta + " | tipo " + tipo
-				+ " | Cantidad de atracciones: " + cantAtracciones + "\n";
+		return "Promocion: " + nombrePropuesta + "; Costo: " + getCosto() + "; Tiempo: " + calcularTiempo()
+				+ "; Cupo: " + getCupo() + "; Cantidad de atracciones: " + promo.size() + "\n";
 	}
 
 	public ArrayList<Propuestas> getPromoList() {
 		return promo;
+	}
 
+	public void setLista(ArrayList<Propuestas> a) {
+		this.promo = a;
+		this.tipo = a.get(0).getTipo();
+		calcularCosto();
+		calcularCupo();
+		calcularTiempo();
+	}
+	
+	public String setTipo() {
+		return this.tipo = this.promo.get(0).getTipo();
+	}
+	
+	public String getTipo() {
+		return this.tipo;
+	}
+
+	public int getDescuento() {
+		return descuento;
+	}
+
+	public String getTipoPromo() {
+		return tipoPromo;
+	}
+	public boolean getEsPromo() {
+		return this.esPromo;
 	}
 }

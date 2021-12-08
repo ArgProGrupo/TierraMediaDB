@@ -9,16 +9,7 @@ public class FactoryDAO {
 	public static AtraccionDAO getAtraccionDAO() {
 		return new AtraccionDAOImpl();
 	}
-
-	public static DescuentoPorcentajeDAO getDescuentoPorcentajeDAO() {
-		return new DescuentoPorcentajeDAOImpl();
-	}
-
-	public static DescuentoAbsolutoDAO getDescuentoAbsolutoDAO() {
-		return new DescuentoAbsolutoDAOImpl();
-	}
-
-	public static DescuentoTresPorDosDAO getDescuentoTresPorDosDAO() {
-		return new DescuentoTresPorDosDAOImpl();
+	public static PromocionDAO getPromocionDAO() {
+		return new PromocionDAOImpl();
 	}
 }
